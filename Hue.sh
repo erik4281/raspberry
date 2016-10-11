@@ -1,5 +1,5 @@
 #!/bin/bash
-DELAY_BETWEEN_CHECKS=5
+DELAY_BETWEEN_CHECKS=15
 PRESENCE_SENSOR=33
 MOTION_SENSOR=18
 HOME_STATE=0 # Assumes home is off when script starts. Will correct itself
