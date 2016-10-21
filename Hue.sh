@@ -33,9 +33,9 @@ SKIP=1
 
 sleep 10
 
-${NEST_GET_AWAY}
-
 while true; do
+
+${NEST_GET_AWAY}
 
 HOME_OLD=${HOME_STATE}
 MOTION_OLD=${MOTION_STATE}
