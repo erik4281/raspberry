@@ -2,8 +2,22 @@
 DELAY_BETWEEN_CHECKS=15
 PRESENCE_SENSOR=33
 MOTION_SENSOR=18
+
 HUE_IP=10.0.1.102
 HUE_USER=erikvennink
+
+NEST_TOKEN="c.EjHCsPyAdOOpf8HHY163CFKLyuef5vxPm09oXkVa8VTSgoir4A3LvPRMHjHnSfp2sPGruqTiIC7ihSstLfBB5R6FgH8PximvgzuOS59vBCiJyxXCTFO5gvqtLPpJokQRk5BQlBCKR4O1wb8d"
+NEST_DEVICE="lZXSTK36nq9Zwa-HCbEPo3yS1tl_uH1Z"
+NEST_STRUCTURE="Z5_5mUBP7B2A9oW47MiJ2zSh6g5JdtC_5o7sfZPvWogu9I0W0IC21A"
+
+NEST_SET_TEMP=curl -L -X PUT "https://developer-api.nest.com/devices/thermostats/${NEST_DEVICE}/target_temperature_f?auth=${NEST_TOKEN}" -H "Content-Type: application/json" -d "$1"
+NEST_GET_TEMP=curl -L https://developer-api.nest.com/devices/thermostats/${NEST_DEVICE}/target_temperature_f\?auth\=${NEST_TOKEN}
+NEST_SET_HOME=curl -L -X PUT "https://developer-api.nest.com/structures/${NEST_STRUCTURE}/away?auth=${NEST_TOKEN}" -H "Content-Type: application/json" -d '"home"'
+NEST_SET_AWAY=curl -L -X PUT "https://developer-api.nest.com/structures/${NEST_STRUCTURE}/away?auth=${NEST_TOKEN}" -H "Content-Type: application/json" -d '"away"'
+NEST_GET_AWAY=curl -L https://developer-api.nest.com/structures/${NEST_STRUCTURE}/away?auth=${NEST_TOKEN}
+
+${NEST_GET_AWAY}
+
 PUSHOVER_TOKEN=azw2c2dw29x8o96ae2m2cp5gtx7mr4
 PUSHOVER_USER=uPnTmp5puvngjiUYpGMGQ3AgUKjhgZ
 PUSHOVER_ALARM_TITLE="ALARM"
@@ -11,8 +25,10 @@ PUSHOVER_ALARM_MESSAGE="MOTION ON!!!"
 PUSHOVER_NOTIFICATION_TITLE="Hue"
 PUSHOVER_NOTIFICATION_MESSAGE_ON="Home ON"
 PUSHOVER_NOTIFICATION_MESSAGE_OFF="Home OFF"
+
 HOME_STATE=0 # Assumes home is off when script starts. Will correct itself
 MOTION_STATE=0 # Assumes home is off when script starts. Will correct itself
+
 SKIP=1
 
 sleep 10
