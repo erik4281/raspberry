@@ -15,6 +15,7 @@ NEST_STRUCTURE="Z5_5mUBP7B2A9oW47MiJ2zSh6g5JdtC_5o7sfZPvWogu9I0W0IC21A"
 #NEST_SET_HOME="curl -L -X PUT \"https://developer-api.nest.com/structures/${NEST_STRUCTURE}/away?auth=${NEST_TOKEN}\" -H \"Content-Type: application/json\" -d '\"home\"'"
 #NEST_SET_AWAY="curl -L -X PUT \"https://developer-api.nest.com/structures/${NEST_STRUCTURE}/away?auth=${NEST_TOKEN}\" -H \"Content-Type: application/json\" -d '\"away\"'"
 NEST_GET_AWAY="curl -L https://developer-api.nest.com/structures/${NEST_STRUCTURE}/away?auth=${NEST_TOKEN}"
+curl -L https://developer-api.nest.com/structures/${NEST_STRUCTURE}/away?auth=c.EjHCsPyAdOOpf8HHY163CFKLyuef5vxPm09oXkVa8VTSgoir4A3LvPRMHjHnSfp2sPGruqTiIC7ihSstLfBB5R6FgH8PximvgzuOS59vBCiJyxXCTFO5gvqtLPpJokQRk5BQlBCKR4O1wb8d
 
 PUSHOVER_TOKEN=azw2c2dw29x8o96ae2m2cp5gtx7mr4
 PUSHOVER_USER=uPnTmp5puvngjiUYpGMGQ3AgUKjhgZ
