@@ -10,10 +10,10 @@ NEST_TOKEN="c.EjHCsPyAdOOpf8HHY163CFKLyuef5vxPm09oXkVa8VTSgoir4A3LvPRMHjHnSfp2sP
 NEST_DEVICE="lZXSTK36nq9Zwa-HCbEPo3yS1tl_uH1Z"
 NEST_STRUCTURE="Z5_5mUBP7B2A9oW47MiJ2zSh6g5JdtC_5o7sfZPvWogu9I0W0IC21A"
 
-NEST_SET_TEMP="curl -L -X PUT "https://developer-api.nest.com/devices/thermostats/${NEST_DEVICE}/target_temperature_f?auth=${NEST_TOKEN}" -H "Content-Type: application/json" -d "$1""
-NEST_GET_TEMP="curl -L https://developer-api.nest.com/devices/thermostats/${NEST_DEVICE}/target_temperature_f\?auth\=${NEST_TOKEN}"
-NEST_SET_HOME="curl -L -X PUT "https://developer-api.nest.com/structures/${NEST_STRUCTURE}/away?auth=${NEST_TOKEN}" -H "Content-Type: application/json" -d '"home"'"
-NEST_SET_AWAY="curl -L -X PUT "https://developer-api.nest.com/structures/${NEST_STRUCTURE}/away?auth=${NEST_TOKEN}" -H "Content-Type: application/json" -d '"away"'"
+#NEST_SET_TEMP="curl -L -X PUT "https://developer-api.nest.com/devices/thermostats/${NEST_DEVICE}/target_temperature_f?auth=${NEST_TOKEN}" -H "Content-Type: application/json" -d "$1""
+#NEST_GET_TEMP="curl -L https://developer-api.nest.com/devices/thermostats/${NEST_DEVICE}/target_temperature_f\?auth\=${NEST_TOKEN}"
+#NEST_SET_HOME="curl -L -X PUT "https://developer-api.nest.com/structures/${NEST_STRUCTURE}/away?auth=${NEST_TOKEN}" -H "Content-Type: application/json" -d '"home"'"
+#NEST_SET_AWAY="curl -L -X PUT "https://developer-api.nest.com/structures/${NEST_STRUCTURE}/away?auth=${NEST_TOKEN}" -H "Content-Type: application/json" -d '"away"'"
 NEST_GET_AWAY="curl -L https://developer-api.nest.com/structures/${NEST_STRUCTURE}/away?auth=${NEST_TOKEN}"
 
 ${NEST_GET_AWAY}
@@ -32,6 +32,8 @@ MOTION_STATE=0 # Assumes home is off when script starts. Will correct itself
 SKIP=1
 
 sleep 10
+
+${NEST_GET_AWAY}
 
 while true; do
 
