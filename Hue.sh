@@ -6,15 +6,15 @@ MOTION_SENSOR=18
 HUE_IP=10.0.1.102
 HUE_USER=erikvennink
 
-NEST_TOKEN="c.EjHCsPyAdOOpf8HHY163CFKLyuef5vxPm09oXkVa8VTSgoir4A3LvPRMHjHnSfp2sPGruqTiIC7ihSstLfBB5R6FgH8PximvgzuOS59vBCiJyxXCTFO5gvqtLPpJokQRk5BQlBCKR4O1wb8d"
-NEST_DEVICE="lZXSTK36nq9Zwa-HCbEPo3yS1tl_uH1Z"
-NEST_STRUCTURE="Z5_5mUBP7B2A9oW47MiJ2zSh6g5JdtC_5o7sfZPvWogu9I0W0IC21A"
+#NEST_TOKEN="c.EjHCsPyAdOOpf8HHY163CFKLyuef5vxPm09oXkVa8VTSgoir4A3LvPRMHjHnSfp2sPGruqTiIC7ihSstLfBB5R6FgH8PximvgzuOS59vBCiJyxXCTFO5gvqtLPpJokQRk5BQlBCKR4O1wb8d"
+#NEST_DEVICE="lZXSTK36nq9Zwa-HCbEPo3yS1tl_uH1Z"
+#NEST_STRUCTURE="Z5_5mUBP7B2A9oW47MiJ2zSh6g5JdtC_5o7sfZPvWogu9I0W0IC21A"
 
 #NEST_SET_TEMP="curl -L -X PUT \"https://developer-api.nest.com/devices/thermostats/${NEST_DEVICE}/target_temperature_f?auth=${NEST_TOKEN}\" -H \"Content-Type: application/json\" -d \"$1\""
 #NEST_GET_TEMP="curl -L https://developer-api.nest.com/devices/thermostats/${NEST_DEVICE}/target_temperature_f\?auth\=${NEST_TOKEN}"
 #NEST_SET_HOME="curl -L -X PUT \"https://developer-api.nest.com/structures/${NEST_STRUCTURE}/away?auth=${NEST_TOKEN}\" -H \"Content-Type: application/json\" -d '\"home\"'"
 #NEST_SET_AWAY="curl -L -X PUT \"https://developer-api.nest.com/structures/${NEST_STRUCTURE}/away?auth=${NEST_TOKEN}\" -H \"Content-Type: application/json\" -d '\"away\"'"
-NEST_GET_AWAY="curl -L https://developer-api.nest.com/structures/${NEST_STRUCTURE}/away?auth=${NEST_TOKEN}"
+#NEST_GET_AWAY="curl -L https://developer-api.nest.com/structures/${NEST_STRUCTURE}/away?auth=${NEST_TOKEN}"
 
 PUSHOVER_TOKEN=azw2c2dw29x8o96ae2m2cp5gtx7mr4
 PUSHOVER_USER=uPnTmp5puvngjiUYpGMGQ3AgUKjhgZ
@@ -33,7 +33,7 @@ sleep 10
 
 while true; do
 
-${NEST_GET_AWAY}
+#${NEST_GET_AWAY}
 
 HOME_OLD=${HOME_STATE}
 MOTION_OLD=${MOTION_STATE}
