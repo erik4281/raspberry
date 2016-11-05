@@ -4,7 +4,7 @@ import time
 def SensorState( SensorName ):
 
   s = "buttonevent\":"
-  a = urllib2.urlopen("http://10.0.1.102/api/monitor/sensors/" + SensorName ).read()
+  a = urllib2.urlopen("http://10.0.1.102/api/erikvennink/sensors/" + SensorName ).read()
   b =  a.find(s) + len(s)
   e = a.find(",",b)
 
