@@ -1,4 +1,12 @@
-{"platforms": [
+{
+
+    "bridge": {
+        "name": "Homebridge",
+        "username": "erikvennink",
+        "port": 51826,
+        "pin": "031-45-154"
+    },
+    "platforms": [
     {
         "platform": "Nest",
         
