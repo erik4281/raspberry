@@ -1,4 +1,4 @@
-"platforms": [
+{"platforms": [
     {
         "platform": "Nest",
         
@@ -9,4 +9,4 @@
         "username" : "jinheeanderik@gmail.com",
         "password" : "Tilburg5042!"
     }
-],
+]}
