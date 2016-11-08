@@ -1,12 +1,8 @@
 {"platforms": [
     {
-        "platform": "Nest",
-        
-        "clientId": "43cb61bb-9132-4f0b-a64d-fad0493235a2",
-        "clientSecret": "wrz2iwzm4QjYjyiTnTnPAVMkG",
-        "code": "FQCRCDKF",
-        
-        "username" : "jinheeanderik@gmail.com",
-        "password" : "Tilburg5042!"
+            "platform": "Nest",
+            "name": "Nest",
+            "username" : "jinheeanderik@gmail.com",
+            "password" : "Tilburg5042!"
     }
 ]}
