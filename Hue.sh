@@ -1,6 +1,7 @@
 #!/bin/bash
 DELAY_BETWEEN_CHECKS=15
-HUE_IP=10.0.1.102
+#HUE_IP=10.0.1.102
+HUE_IP=curl https://www.meethue.com/api/nupnp 2> /dev/null | jq -r ".[0].internalipaddress"
 HUE_USER=erikvennink
 
 HUE_LIGHT_LIVING_DEATH_STAR=1
