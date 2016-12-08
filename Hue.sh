@@ -97,8 +97,8 @@ if [ $? -eq 0 ]; then
 else
   HOME_STATE=0
 fi
-print ${HOME_STATE}
-print ${HOME_OLD}
+echo ${HOME_STATE}
+echo ${HOME_OLD}
 
 curl -s -silent -H "Accept: application/json" -X GET http://${HUE_IP}/api/${HUE_USER}/sensors/${MOTION_SENSOR}/ | grep '{"presence":true'
 
@@ -107,41 +107,41 @@ if [ $? -eq 0 ]; then
 else
   MOTION_STATE=0
 fi
-print ${MOTION_STATE}
-print ${MOTION_OLD}
+echo ${MOTION_STATE}
+echo ${MOTION_OLD}
 
 if [[ ${HOME_STATE} = ${HOME_OLD} ]]; then
   HOME_STATE=${HOME_OLD}
-  #echo "Home state not changed"
+  echo "Home state not changed"
   if [[ ${HOME_STATE} = 0 ]]; then
     if [[ ${MOTION_STATE} = ${MOTION_OLD} ]]; then
-      #echo "Motion not changed"
+      echo "Motion not changed"
       MOTION_STATE=${MOTION_OLD}
     elif [[ ${SKIP} = 0 ]]; then
-      #echo "Motion changed and not skipping"
+      echo "Motion changed and not skipping"
       if [[ ${MOTION_STATE} = 1 ]]; then
-        #echo "Motion is ON"
+        echo "Motion is ON"
         curl -s -F "token=${PUSHOVER_TOKEN}" -F "user=${PUSHOVER_USER}" -F "title=${PUSHOVER_ALARM_TITLE}" -F "message=${PUSHOVER_ALARM_MESSAGE}" https://api.pushover.net/1/messages.json
       fi
     fi
   fi
 elif [[ ${SKIP} = 0 ]]; then
-  #echo "Home state changed and not skipping"
+  echo "Home state changed and not skipping"
   if [[ ${HOME_STATE} = 1 ]]; then
-    #echo "Home state now ON"
+    echo "Home state now ON"
     curl -s -F "token=${PUSHOVER_TOKEN}" -F "user=${PUSHOVER_USER}" -F "title=${PUSHOVER_NOTIFICATION_TITLE}" -F "message=${PUSHOVER_NOTIFICATION_MESSAGE_ON}" https://api.pushover.net/1/messages.json
   else
-    #echo "HOME state now OFF"
+    echo "HOME state now OFF"
     curl -s -F "token=${PUSHOVER_TOKEN}" -F "user=${PUSHOVER_USER}" -F "title=${PUSHOVER_NOTIFICATION_TITLE}" -F "message=${PUSHOVER_NOTIFICATION_MESSAGE_OFF}" https://api.pushover.net/1/messages.json
   fi
 fi
 
 SKIP=0
 
-#echo "NEXT ROUND......"
+echo "NEXT ROUND......"
 
 sleep ${DELAY_BETWEEN_CHECKS}
 
-#echo "...Starting now..."
+echo "...Starting now..."
 
 done # End of perpetual loop
