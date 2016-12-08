@@ -1,7 +1,7 @@
 #!/bin/bash
 DELAY_BETWEEN_CHECKS=15
 #HUE_IP=10.0.1.102
-HUE_IP=curl https://www.meethue.com/api/nupnp 2> /dev/null | jq -r ".[0].internalipaddress"
+HUE_IP=$(curl https://www.meethue.com/api/nupnp 2> /dev/null | jq -r ".[0].internalipaddress")
 HUE_USER=erikvennink
 
 PUSHOVER_TOKEN=azw2c2dw29x8o96ae2m2cp5gtx7mr4
@@ -25,7 +25,7 @@ HOME_OLD=${HOME_STATE}
 MOTION_OLD=${MOTION_STATE}
 
 #CHECK_LIGHTS=curl -s -silent -H "Accept: application/json" -X GET http://${HUE_IP}/api/${HUE_USER}/lights/ | grep '":{"state":{"on":true'
-CHECK_LIGHTS=curl -silent -H "Accept: application/json" -X GET http://${HUE_IP}/api/${HUE_USER}/lights/ | grep '":{"state":{"on":true'
+CHECK_LIGHTS=$(curl -s -silent -H "Accept: application/json" -X GET http://${HUE_IP}/api/${HUE_USER}/lights/ | grep '":{"state":{"on":true')
 echo IP ${HUE_IP}
 echo Lights Checker ${CHECK_LIGHTS}
 
