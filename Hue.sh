@@ -42,6 +42,13 @@ fi
 echo Home State was ${HOME_OLD}, is now ${HOME_STATE}
 echo Motion State was ${MOTION_OLD}, is now ${MOTION_STATE}
 
+if [[ ${SKIP} = 1 ]]; then
+  sleep ${DELAY_BETWEEN_CHECKS}
+  done
+fi
+
+echo Continue only second round...
+
 if [[ ${HOME_STATE} = ${HOME_OLD} ]]; then
   HOME_STATE=${HOME_OLD}
   echo "Home state not changed"
