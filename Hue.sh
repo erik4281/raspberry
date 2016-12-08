@@ -25,13 +25,14 @@ HOME_OLD=${HOME_STATE}
 MOTION_OLD=${MOTION_STATE}
 
 #CHECK_LIGHTS=curl -s -silent -H "Accept: application/json" -X GET http://${HUE_IP}/api/${HUE_USER}/lights/ | grep '":{"state":{"on":true'
-CHECK_LIGHTS=$(curl -s -silent -H "Accept: application/json" -X GET http://${HUE_IP}/api/${HUE_USER}/lights/34/ | grep '":{"state":{"on":true')
-echo Lights Checker ${CHECK_LIGHTS}
+CHECK_LIGHTS=$(curl -s -silent -H "Accept: application/json" -X GET http://${HUE_IP}/api/${HUE_USER}/lights/ | grep '{"state":{"on":true')
 
-if [ $? -eq 0 ]; then
+if [ ${CHECK_LIGHTS} -eq 0 ]; then
   HOME_STATE=1
+  echo Home State 1
 else
   HOME_STATE=0
+  echo Home State 0
 fi
 echo ${HOME_STATE}
 echo ${HOME_OLD}
