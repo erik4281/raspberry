@@ -1,5 +1,6 @@
 #!/bin/bash
 DELAY_BETWEEN_CHECKS=15
+LONG_DELAY_BETWEEN_CHECKS=30
 #HUE_IP=10.0.1.102
 HUE_IP=$(curl https://www.meethue.com/api/nupnp 2> /dev/null | jq -r ".[0].internalipaddress")
 HUE_USER=erikvennink
@@ -61,14 +62,14 @@ if [[ ${HOME_STATE} = ${HOME_OLD} ]]; then
       fi
     fi
   else
-    DELAY_BETWEEN_CHECKS=${DELAY_BETWEEN_CHECKS}*2
+    DELAY_BETWEEN_CHECKS=${LONG_DELAY_BETWEEN_CHECKS}
   fi
 elif [[ ${SKIP} = 0 ]]; then
   echo "Home state changed and not skipping"
   if [[ ${HOME_STATE} = 1 ]]; then
     echo "Home state now ON"
     curl -s -F "token=${PUSHOVER_TOKEN}" -F "user=${PUSHOVER_USER}" -F "title=${PUSHOVER_NOTIFICATION_TITLE}" -F "message=${PUSHOVER_NOTIFICATION_MESSAGE_ON}" https://api.pushover.net/1/messages.json
-    DELAY_BETWEEN_CHECKS=${DELAY_BETWEEN_CHECKS}*2
+    DELAY_BETWEEN_CHECKS=${LONG_DELAY_BETWEEN_CHECKS}
   else
     echo "HOME state now OFF"
     curl -s -F "token=${PUSHOVER_TOKEN}" -F "user=${PUSHOVER_USER}" -F "title=${PUSHOVER_NOTIFICATION_TITLE}" -F "message=${PUSHOVER_NOTIFICATION_MESSAGE_OFF}" https://api.pushover.net/1/messages.json
