@@ -60,7 +60,7 @@ if [[ ${HOME_STATE} = ${HOME_OLD} ]]; then
         curl -s -F "token=${PUSHOVER_TOKEN}" -F "user=${PUSHOVER_USER}" -F "title=${PUSHOVER_ALARM_TITLE}" -F "message=${PUSHOVER_ALARM_MESSAGE}" https://api.pushover.net/1/messages.json
       fi
     fi
-  elif
+  else
     DELAY_BETWEEN_CHECKS=${DELAY_BETWEEN_CHECKS}*2
   fi
 elif [[ ${SKIP} = 0 ]]; then
