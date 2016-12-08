@@ -27,7 +27,7 @@ MOTION_OLD=${MOTION_STATE}
 #CHECK_LIGHTS=curl -s -silent -H "Accept: application/json" -X GET http://${HUE_IP}/api/${HUE_USER}/lights/ | grep '":{"state":{"on":true'
 CHECK_LIGHTS=$(curl -s -silent -H "Accept: application/json" -X GET http://${HUE_IP}/api/${HUE_USER}/lights/ | grep '{"state":{"on":true')
 
-if [ "${CHECK_LIGHTS}" -eq 0 ]; then
+if [ "${CHECK_LIGHTS}" ]; then
   HOME_STATE=1
   echo Home State 1
 else
