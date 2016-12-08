@@ -21,10 +21,14 @@ sleep 2
 
 while true; do
 
+DELAY_BETWEEN_CHECKS=${DELAY_BETWEEN_CHECKS}
+
+echo Delay: ${DELAY_BETWEEN_CHECKS}
+
 HOME_OLD=${HOME_STATE}
 MOTION_OLD=${MOTION_STATE}
 
-CHECK_LIGHTS=$(curl -s -silent -H "Accept: application/json" -X GET http://${HUE_IP}/api/${HUE_USER}/lights/ | grep '{"state":{"on":true')
+CHECK_LIGHTS=$(curl -s -silent -H "Accept: application/json" -X GET http://${HUE_IP}/api/${HUE_USER}/lights/33/ | grep '{"state":{"on":true')
 CHECK_MOTION=$(curl -s -silent -H "Accept: application/json" -X GET http://${HUE_IP}/api/${HUE_USER}/sensors/ | grep '{"state":{"presence":true')
 
 if [ "${CHECK_LIGHTS}" ]; then
@@ -42,13 +46,6 @@ fi
 echo Home State was ${HOME_OLD}, is now ${HOME_STATE}
 echo Motion State was ${MOTION_OLD}, is now ${MOTION_STATE}
 
-if [[ ${SKIP} = 1 ]]; then
-  sleep ${DELAY_BETWEEN_CHECKS}
-  done
-fi
-
-echo Continue only second round...
-
 if [[ ${HOME_STATE} = ${HOME_OLD} ]]; then
   HOME_STATE=${HOME_OLD}
   echo "Home state not changed"
@@ -63,12 +60,15 @@ if [[ ${HOME_STATE} = ${HOME_OLD} ]]; then
         curl -s -F "token=${PUSHOVER_TOKEN}" -F "user=${PUSHOVER_USER}" -F "title=${PUSHOVER_ALARM_TITLE}" -F "message=${PUSHOVER_ALARM_MESSAGE}" https://api.pushover.net/1/messages.json
       fi
     fi
+  elif
+    DELAY_BETWEEN_CHECKS=${DELAY_BETWEEN_CHECKS}*2
   fi
 elif [[ ${SKIP} = 0 ]]; then
   echo "Home state changed and not skipping"
   if [[ ${HOME_STATE} = 1 ]]; then
     echo "Home state now ON"
     curl -s -F "token=${PUSHOVER_TOKEN}" -F "user=${PUSHOVER_USER}" -F "title=${PUSHOVER_NOTIFICATION_TITLE}" -F "message=${PUSHOVER_NOTIFICATION_MESSAGE_ON}" https://api.pushover.net/1/messages.json
+    DELAY_BETWEEN_CHECKS=${DELAY_BETWEEN_CHECKS}*2
   else
     echo "HOME state now OFF"
     curl -s -F "token=${PUSHOVER_TOKEN}" -F "user=${PUSHOVER_USER}" -F "title=${PUSHOVER_NOTIFICATION_TITLE}" -F "message=${PUSHOVER_NOTIFICATION_MESSAGE_OFF}" https://api.pushover.net/1/messages.json
