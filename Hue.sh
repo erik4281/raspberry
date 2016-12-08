@@ -24,8 +24,8 @@ while true; do
 HOME_OLD=${HOME_STATE}
 MOTION_OLD=${MOTION_STATE}
 
-#CHECK_LIGHTS=curl -s -silent -H "Accept: application/json" -X GET http://${HUE_IP}/api/${HUE_USER}/lights/ | grep '":{"state":{"on":true'
 CHECK_LIGHTS=$(curl -s -silent -H "Accept: application/json" -X GET http://${HUE_IP}/api/${HUE_USER}/lights/ | grep '{"state":{"on":true')
+CHECK_MOTION=${curl -s -silent -H "Accept: application/json" -X GET http://${HUE_IP}/api/${HUE_USER}/sensors/ | grep '{"state":{"presence":true')
 
 if [ "${CHECK_LIGHTS}" ]; then
   HOME_STATE=1
@@ -37,15 +37,14 @@ fi
 echo ${HOME_STATE}
 echo ${HOME_OLD}
 
-curl -s -silent -H "Accept: application/json" -X GET http://${HUE_IP}/api/${HUE_USER}/sensors/ | grep '":{"state":{"presence":true'
-
-if [ $? -eq 0 ]; then
+if [ "${CHECK_MOTION}" ]; then
   MOTION_STATE=1
 else
   MOTION_STATE=0
 fi
-echo ${MOTION_STATE}
-echo ${MOTION_OLD}
+
+echo Home State ${HOME_STATE}
+echo Motion State ${MOTION_STATE}
 
 if [[ ${HOME_STATE} = ${HOME_OLD} ]]; then
   HOME_STATE=${HOME_OLD}
