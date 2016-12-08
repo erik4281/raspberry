@@ -29,13 +29,9 @@ CHECK_MOTION=$(curl -s -silent -H "Accept: application/json" -X GET http://${HUE
 
 if [ "${CHECK_LIGHTS}" ]; then
   HOME_STATE=1
-  echo Home State 1
 else
   HOME_STATE=0
-  echo Home State 0
 fi
-echo ${HOME_STATE}
-echo ${HOME_OLD}
 
 if [ "${CHECK_MOTION}" ]; then
   MOTION_STATE=1
@@ -43,8 +39,8 @@ else
   MOTION_STATE=0
 fi
 
-echo Home State ${HOME_STATE}
-echo Motion State ${MOTION_STATE}
+echo Home State was ${HOME_OLD}, is now ${HOME_STATE}
+echo Motion State was ${MOTION_OLD}, is now ${MOTION_STATE}
 
 if [[ ${HOME_STATE} = ${HOME_OLD} ]]; then
   HOME_STATE=${HOME_OLD}
