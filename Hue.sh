@@ -97,6 +97,8 @@ if [ $? -eq 0 ]; then
 else
   HOME_STATE=0
 fi
+print ${HOME_STATE}
+print ${HOME_OLD}
 
 curl -s -silent -H "Accept: application/json" -X GET http://${HUE_IP}/api/${HUE_USER}/sensors/${MOTION_SENSOR}/ | grep '{"presence":true'
 
@@ -105,6 +107,8 @@ if [ $? -eq 0 ]; then
 else
   MOTION_STATE=0
 fi
+print ${MOTION_STATE}
+print ${MOTION_OLD}
 
 if [[ ${HOME_STATE} = ${HOME_OLD} ]]; then
   HOME_STATE=${HOME_OLD}
