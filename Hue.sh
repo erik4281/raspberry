@@ -1,6 +1,8 @@
 #!/bin/bash
 DELAY_BETWEEN_CHECKS=15
 
+sleep 10
+
 HUE_IP=$(curl https://www.meethue.com/api/nupnp 2> /dev/null | jq -r ".[0].internalipaddress")
 HUE_USER=erikvennink
 
@@ -18,7 +20,6 @@ MOTION_STATE=0 # Assumes home is off when script starts. Will correct itself
 SKIP=1
 
 echo "Script started on $(date) with IP ${HUE_IP} and used ${HUE_USER}" >> log
-sleep 10
 
 while true; do
 
