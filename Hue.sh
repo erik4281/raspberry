@@ -52,7 +52,7 @@ if [[ ${HOME_STATE} = ${HOME_OLD} ]]; then
     elif [[ ${SKIP} = 0 ]]; then
       #echo "Motion changed and not skipping"
       if [[ ${MOTION_STATE} = 1 ]]; then
-        #echo "Motion is ON"
+        echo "$(date): ALARM: Motion is ON" >> log
         curl -s -F "token=${PUSHOVER_TOKEN}" -F "user=${PUSHOVER_USER}" -F "title=${PUSHOVER_ALARM_TITLE}" -F "message=${PUSHOVER_ALARM_MESSAGE}" https://api.pushover.net/1/messages.json
       fi
     fi
@@ -60,20 +60,20 @@ if [[ ${HOME_STATE} = ${HOME_OLD} ]]; then
 elif [[ ${SKIP} = 0 ]]; then
   #echo "Home state changed and not skipping"
   if [[ ${HOME_STATE} = 1 ]]; then
-    #echo "Home state now ON"
+    echo "$(date): Home state changed to ON" >> log
     curl -s -F "token=${PUSHOVER_TOKEN}" -F "user=${PUSHOVER_USER}" -F "title=${PUSHOVER_NOTIFICATION_TITLE}" -F "message=${PUSHOVER_NOTIFICATION_MESSAGE_ON}" https://api.pushover.net/1/messages.json
   else
-    #echo "Home state now OFF"
+    echo "$(date): Home state changed to OFF" >> log
     curl -s -F "token=${PUSHOVER_TOKEN}" -F "user=${PUSHOVER_USER}" -F "title=${PUSHOVER_NOTIFICATION_TITLE}" -F "message=${PUSHOVER_NOTIFICATION_MESSAGE_OFF}" https://api.pushover.net/1/messages.json
   fi
 fi
 
 SKIP=0
 
-echo "$(date): NEXT ROUND......in ${DELAY_BETWEEN_CHECKS} seconds" >> log
+#echo "$(date): NEXT ROUND......in ${DELAY_BETWEEN_CHECKS} seconds" >> log
 
 sleep ${DELAY_BETWEEN_CHECKS}
 
-echo "$(date): Starting now..." >> log
+#echo "$(date): Starting now..." >> log
 
 done # End of perpetual loop
