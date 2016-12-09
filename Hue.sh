@@ -41,7 +41,7 @@ else
   MOTION_STATE=0
 fi
 
-echo "$(date): Home State was ${HOME_OLD}, is now ${HOME_STATE}. Motion State was ${MOTION_OLD}, is now ${MOTION_STATE}." >> log
+#echo "$(date): Home State was ${HOME_OLD}, is now ${HOME_STATE}. Motion State was ${MOTION_OLD}, is now ${MOTION_STATE}." >> log
 
 if [[ ${HOME_STATE} = ${HOME_OLD} ]]; then
   HOME_STATE=${HOME_OLD}
