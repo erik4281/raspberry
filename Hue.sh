@@ -17,7 +17,7 @@ MOTION_STATE=0 # Assumes home is off when script starts. Will correct itself
 
 SKIP=1
 
-sleep 2
+sleep 10
 
 while true; do
 
