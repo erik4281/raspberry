@@ -55,7 +55,7 @@ if [[ ${HOME_STATE} = ${HOME_OLD} ]]; then
       if [[ ${MOTION_STATE} = 1 ]]; then
         echo "$(date): ALARM: Motion is ON" >> HueLog
         curl -s -silent -F "token=${PUSHOVER_TOKEN}" -F "user=${PUSHOVER_USER}" -F "title=${PUSHOVER_ALARM_TITLE}" -F "message=${PUSHOVER_ALARM_MESSAGE}" https://api.pushover.net/1/messages.json
-        curl -s -silent -H "Accept: application/json" -X PUT --data '{"on":true}' http://${HUE_IP}/api/${HUE_USER}/sensors/33/state
+        curl -s -silent -H "Accept: application/json" -X PUT --data '{"on":true}' http://${HUE_IP}/api/${HUE_USER}/lights/33/state
       fi
     fi
   fi
