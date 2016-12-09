@@ -17,7 +17,7 @@ MOTION_STATE=0 # Assumes home is off when script starts. Will correct itself
 
 SKIP=1
 
-echo "Script started on $(date)" >> log
+echo "Script started on $(date) with IP ${HUE_IP} and used ${HUE_USER}" >> log
 sleep 10
 
 while true; do
