@@ -19,7 +19,7 @@ MOTION_STATE=0 # Assumes home is off when script starts. Will correct itself
 
 SKIP=1
 
-echo "Script started on $(date) with IP ${HUE_IP} and used ${HUE_USER}" >> log
+echo "Script started on $(date) with IP ${HUE_IP} and used ${HUE_USER}" >> HueLog
 
 while true; do
 
@@ -53,18 +53,19 @@ if [[ ${HOME_STATE} = ${HOME_OLD} ]]; then
     elif [[ ${SKIP} = 0 ]]; then
       #echo "Motion changed and not skipping"
       if [[ ${MOTION_STATE} = 1 ]]; then
-        echo "$(date): ALARM: Motion is ON" >> log
+        echo "$(date): ALARM: Motion is ON" >> HueLog
         curl -s -silent -F "token=${PUSHOVER_TOKEN}" -F "user=${PUSHOVER_USER}" -F "title=${PUSHOVER_ALARM_TITLE}" -F "message=${PUSHOVER_ALARM_MESSAGE}" https://api.pushover.net/1/messages.json
+        curl -s -silent -H "Accept: application/json" -X PUT --data '{"on":true}' http://${HUE_IP}/api/${HUE_USER}/sensors/33/state
       fi
     fi
   fi
 elif [[ ${SKIP} = 0 ]]; then
   #echo "Home state changed and not skipping"
   if [[ ${HOME_STATE} = 1 ]]; then
-    echo "$(date): Home state changed to ON" >> log
+    echo "$(date): Home state changed to ON" >> HueLog
     curl -s -silent -F "token=${PUSHOVER_TOKEN}" -F "user=${PUSHOVER_USER}" -F "title=${PUSHOVER_NOTIFICATION_TITLE}" -F "message=${PUSHOVER_NOTIFICATION_MESSAGE_ON}" https://api.pushover.net/1/messages.json
   else
-    echo "$(date): Home state changed to OFF" >> log
+    echo "$(date): Home state changed to OFF" >> HueLog
     curl -s -silent -F "token=${PUSHOVER_TOKEN}" -F "user=${PUSHOVER_USER}" -F "title=${PUSHOVER_NOTIFICATION_TITLE}" -F "message=${PUSHOVER_NOTIFICATION_MESSAGE_OFF}" https://api.pushover.net/1/messages.json
   fi
   curl -s -silent -H "Accept: application/json" -X PUT --data '{"on":true}' http://${HUE_IP}/api/${HUE_USER}/sensors/7/config
