@@ -17,6 +17,7 @@ MOTION_STATE=0 # Assumes home is off when script starts. Will correct itself
 
 SKIP=1
 
+echo "Script started on $(date)" >> log
 sleep 10
 
 while true; do
@@ -39,8 +40,8 @@ else
   MOTION_STATE=0
 fi
 
-echo "Home State was ${HOME_OLD}, is now ${HOME_STATE}" >> log
-echo Motion State was ${MOTION_OLD}, is now ${MOTION_STATE}
+echo "$(date): Home State was ${HOME_OLD}, is now ${HOME_STATE}" >> log
+echo "$(date): Motion State was ${MOTION_OLD}, is now ${MOTION_STATE}" >> log
 
 if [[ ${HOME_STATE} = ${HOME_OLD} ]]; then
   HOME_STATE=${HOME_OLD}
