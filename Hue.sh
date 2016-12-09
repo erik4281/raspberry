@@ -39,7 +39,7 @@ else
   MOTION_STATE=0
 fi
 
-echo Home State was ${HOME_OLD}, is now ${HOME_STATE}
+echo "Home State was ${HOME_OLD}, is now ${HOME_STATE}" >> log
 echo Motion State was ${MOTION_OLD}, is now ${MOTION_STATE}
 
 if [[ ${HOME_STATE} = ${HOME_OLD} ]]; then
