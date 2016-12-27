@@ -18,7 +18,7 @@
     },
     {
         "platform": "Hue",
-        "name": "Hue"
+        "name": "Hue",
         "host": "192.168.1.11",
         "heartrate": 5,
         "timeout": 5,
