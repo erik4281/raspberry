@@ -28,7 +28,7 @@
         "lights": false,
         "philipslights": false,
         "groups": false,
-        "group0": true,
+        "group0": false,
         "rooms": false,
         "sensors": false,
         "clipsensors": true,
