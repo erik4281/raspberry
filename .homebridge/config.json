@@ -20,6 +20,9 @@
         "platform": "Hue",
         "name": "Hue",
         "host": "192.168.1.11",
+        "users": {
+          "001788FFFE2740C6": "1TN6blJWgcMW21Jg5TWC4rzkGwO78v-RCso8Olt4"
+        }
         "heartrate": 5,
         "timeout": 5,
         "lights": false,
