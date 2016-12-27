@@ -15,5 +15,21 @@
         "clientId": "43cb61bb-9132-4f0b-a64d-fad0493235a2",
         "clientSecret": "wrz2iwzm4QjYjyiTnTnPAVMkG",
         "code": "QY43WJ3A"
+    },
+    {
+        "platform": "Hue",
+        "name": "Hue"
+        "host": "192.168.1.11",
+        "heartrate": 5,
+        "timeout": 5,
+        "lights": false,
+        "philipslights": false,
+        "groups": false,
+        "group0": true,
+        "rooms": false,
+        "sensors": false,
+        "clipsensors": true,
+        "schedules": false,
+        "rules": false
     }
 ]}
