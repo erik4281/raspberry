@@ -62,3 +62,4 @@ echo "$(date): Script started with IP ${HUE_IP} and used ${HUE_USER}" >> HueBrid
 curl -s -H "Accept: application/json" -X PUT --data '{"on":true,"bri": 150,"sat": 150,"hue":15000,"transitiontime":50}' http://${HUE_IP}/api/${HUE_USER}/groups/${GRP_KEUKEN}/action
 
 #curl -s -silent -H "Accept: application/json" -X PUT --data '{"on":true}' http://${HUE_IP}/api/${HUE_USER}/sensors/41/config
+echo "$(date): Script finished succesfully" >> HueBridgeLog
