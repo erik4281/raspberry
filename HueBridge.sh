@@ -53,17 +53,18 @@ TRG_WOONKAMER=4
 
 echo "$(date): Script started with IP ${HUE_IP} and used ${HUE_USER}" >> HueBridgeLog
 
-i="0"
+i="1"
 
 while [ $i -lt 4 ]
 do
 echo $i
+curl -s -H "Accept: application/json" -X DELETE http://${HUE_IP}/api/${HUE_USER}/rules/$i
 i=$[$i+1]
 done
 
-curl -s -H "Accept: application/json" -X DELETE http://${HUE_IP}/api/${HUE_USER}/rules/1
-curl -s -H "Accept: application/json" -X DELETE http://${HUE_IP}/api/${HUE_USER}/rules/2
-curl -s -H "Accept: application/json" -X DELETE http://${HUE_IP}/api/${HUE_USER}/rules/3
+#curl -s -H "Accept: application/json" -X DELETE http://${HUE_IP}/api/${HUE_USER}/rules/1
+#curl -s -H "Accept: application/json" -X DELETE http://${HUE_IP}/api/${HUE_USER}/rules/2
+#curl -s -H "Accept: application/json" -X DELETE http://${HUE_IP}/api/${HUE_USER}/rules/3
 
 curl -s -H "Accept: application/json" -X POST --data '{"name":"MotionSensor 41.day-on","conditions":[{"address":"/config/localtime","operator":"in","value":"T06:00:00/T00:00:00"},{"address":"/sensors/57/state/presence","operator":"eq","value":"true"},{"address":"/sensors/57/state/presence","operator":"dx"},{"address":"/sensors/55/state/status","operator":"lt","value":"1"},{"address":"/sensors/42/state/dark","operator":"eq","value":"true"}],"actions":[{"address":"/groups/1/action","method":"PUT","body":{     "scene": "lY5rBuP7YPzNSxR"    }},{"address":"/groups/11/action","method":"PUT","body":{     "scene": "JpsE2311TGWeCc4"    }},{"address":"/sensors/55/state","method":"PUT","body":{     "status": 1    }}]}' http://${HUE_IP}/api/${HUE_USER}/rules/
 curl -s -H "Accept: application/json" -X POST --data '{"name":"MotionSensor 41.day-dark-on","conditions":[{"address":"/config/localtime","operator":"in","value":"T06:00:00/T00:00:00"},{"address":"/sensors/57/state/presence","operator":"eq","value":"true"},{"address":"/sensors/42/state/dark","operator":"eq","value":"true"},{"address":"/sensors/42/state/dark","operator":"dx"},{"address":"/sensors/55/state/status","operator":"lt","value":"1"}],"actions":[{"address":"/groups/1/action","method":"PUT","body":{"scene":"lY5rBuP7YPzNSxR"}},{"address":"/groups/11/action","method":"PUT","body":{"scene":"JpsE2311TGWeCc4"}},{"address":"/sensors/55/state","method":"PUT","body":{"status":1}}]}' http://${HUE_IP}/api/${HUE_USER}/rules/
