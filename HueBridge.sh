@@ -62,6 +62,8 @@ curl -s -H "Accept: application/json" -X DELETE http://${HUE_IP}/api/${HUE_USER}
 i=$[$i+1]
 done
 
+curl -s -H "Accept: application/json" -X POST --data '{"name":"TEST","conditions":[{"address":"/config/localtime","operator":"eq","value":"T00:25:00"}],"actions":[{"address":"/groups/11/action","method":"PUT","body":{"scene":"1G3OM-y5bQ76SaI"}}]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
+
 #Combined rules for motion in the living room, dining room, kitchen and hallway
 curl -s -H "Accept: application/json" -X POST --data '{"name":"MotionWoonkamer.always-on","conditions":[{"address":"/sensors/7/state/presence","operator":"eq","value":"true"},{"address":"/sensors/7/state/presence","operator":"dx"}],"actions":[{"address":"/groups/11/action","method":"PUT","body":{"scene":"JpsE2311TGWeCc4"}},{"address":"/sensors/4/state","method":"PUT","body":{"presence":true}},{"address":"/sensors/57/state","method":"PUT","body":{"presence":true}}]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
 curl -s -H "Accept: application/json" -X POST --data '{"name":"MotionEetkamer.always-on","conditions":[{"address":"/sensors/41/state/presence","operator":"eq","value":"true"},{"address":"/sensors/41/state/presence","operator":"dx"}],"actions":[{"address":"/groups/11/action","method":"PUT","body":{"scene": "JpsE2311TGWeCc4"}},{"address":"/sensors/4/state","method":"PUT","body":{"presence":true}},{"address":"/sensors/57/state","method":"PUT","body":{"presence":true}}]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
