@@ -3,15 +3,8 @@
 HUE_IP=$(curl https://www.meethue.com/api/nupnp 2> /dev/null | jq -r ".[0].internalipaddress")
 HUE_USER=erikvennink
 
-#TIMESLOTS
-DAYTIME='{"address":"/config/localtime","operator":"in","value":"T06:00:00/T00:00:00"}'
-NIGHTTIME='{"address":"/config/localtime","operator":"in","value":"T00:00:00/T06:00:00"}'
-
 #GROUPS + SCENES
 GRP_WOONKAMER=1
-SCN_WOONKAMER_AVOND="lY5rBuP7YPzNSxR"
-SCN_WOONKAMER_NACHT="kbwTjMUg7yd-fCn"
-SCN_WOONKAMER_OFF="Y1efqVouGJOT-Rt"
 GRP_KEUKEN=2
 GRP_HAL=3
 GRP_SLAAPKAMER=4
@@ -60,7 +53,7 @@ TRG_WOONKAMER=4
 
 echo "$(date): Script started with IP ${HUE_IP} and used ${HUE_USER}" >> HueBridgeLog
 
-curl -s -H "Accept: application/json" -X PUT --data '{"name":"MotionSensor 41.day-on","conditions":[${DAYTIME},{"address":"/sensors/57/state/presence","operator":"eq","value":"true"},{"address":"/sensors/57/state/presence","operator":"dx"},{"address":"/sensors/55/state/status","operator":"lt","value":"1"},{"address":"/sensors/42/state/dark","operator":"eq","value":"true"}],"actions":[{"address":"/groups/1/action","method":"PUT","body":{     "scene": "lY5rBuP7YPzNSxR"    }},{"address":"/groups/11/action","method":"PUT","body":{     "scene": "JpsE2311TGWeCc4"    }},{"address":"/sensors/55/state","method":"PUT","body":{     "status": 1    }}]}' http://${HUE_IP}/api/${HUE_USER}/rules/1/
+curl -s -H "Accept: application/json" -X PUT --data '{"name":"MotionSensor 41.day-on","conditions":[{"address":"/config/localtime","operator":"in","value":"T06:00:00/T00:00:00"},{"address":"/sensors/57/state/presence","operator":"eq","value":"true"},{"address":"/sensors/57/state/presence","operator":"dx"},{"address":"/sensors/55/state/status","operator":"lt","value":"1"},{"address":"/sensors/42/state/dark","operator":"eq","value":"true"}],"actions":[{"address":"/groups/1/action","method":"PUT","body":{     "scene": "lY5rBuP7YPzNSxR"    }},{"address":"/groups/11/action","method":"PUT","body":{     "scene": "JpsE2311TGWeCc4"    }},{"address":"/sensors/55/state","method":"PUT","body":{     "status": 1    }}]}' http://${HUE_IP}/api/${HUE_USER}/rules/1/
 curl -s -H "Accept: application/json" -X PUT --data '{"name":"MotionSensor 41.day-dark-on","conditions":[{"address":"/config/localtime","operator":"in","value":"T06:00:00/T00:00:00"},{"address":"/sensors/57/state/presence","operator":"eq","value":"true"},{"address":"/sensors/42/state/dark","operator":"eq","value":"true"},{"address":"/sensors/42/state/dark","operator":"dx"},{"address":"/sensors/55/state/status","operator":"lt","value":"1"}],"actions":[{"address":"/groups/1/action","method":"PUT","body":{"scene":"lY5rBuP7YPzNSxR"}},{"address":"/groups/11/action","method":"PUT","body":{"scene":"JpsE2311TGWeCc4"}},{"address":"/sensors/55/state","method":"PUT","body":{"status":1}}]}' http://${HUE_IP}/api/${HUE_USER}/rules/2/
 curl -s -H "Accept: application/json" -X PUT --data '{"name":"MotionSensor 41.night-on","conditions":[{"address":"/config/localtime","operator":"in","value":"T00:00:00/T06:00:00"},{"address":"/sensors/57/state/presence","operator":"eq","value":"true"},{"address":"/sensors/57/state/presence","operator":"dx"},{"address":"/sensors/55/state/status","operator":"lt","value":"1"},{"address":"/sensors/42/state/dark","operator":"eq","value":"true"}],"actions":[{"address":"/groups/1/action","method":"PUT","body":{"scene":"kbwTjMUg7yd-fCn"}},{"address":"/groups/11/action","method":"PUT","body":{"scene":"1G3OM-y5bQ76SaI"}},{"address":"/sensors/55/state","method":"PUT","body":{"status":1}}]}' http://${HUE_IP}/api/${HUE_USER}/rules/3/
 curl -s -H "Accept: application/json" -X PUT --data '{"name":"MotionSensor 41.night-dark-on","conditions":[{"address":"/config/localtime","operator":"in","value":"T00:00:00/T06:00:00"},{"address":"/sensors/57/state/presence","operator":"eq","value":"true"},{"address":"/sensors/42/state/dark","operator":"eq","value":"true"},{"address":"/sensors/42/state/dark","operator":"dx"},{"address":"/sensors/55/state/status","operator":"lt","value":"1"}],"actions":[{"address":"/groups/1/action","method":"PUT","body":{"scene":"kbwTjMUg7yd-fCn"}},{"address":"/groups/11/action","method":"PUT","body":{"scene":"1G3OM-y5bQ76SaI"}},{"address":"/sensors/55/state","method":"PUT","body":{"status":1}}]}' http://${HUE_IP}/api/${HUE_USER}/rules/4/
@@ -181,8 +174,8 @@ curl -s -H "Accept: application/json" -X PUT --data '{"name":"MotionSensor 12.di
 curl -s -H "Accept: application/json" -X PUT --data '{"name":"MotionSensor 26.dim-backup","conditions":[{"address":"/sensors/26/state/presence","operator":"eq","value":"false"},{"address":"/sensors/26/state/presence","operator":"ddx","value":"PT00:29:15"},{"address":"/groups/5/state/any_on","operator":"eq","value":"true"}],"actions":[{"address":"/scenes/Dv0kxgYj3itnw3S","method":"PUT","body":{     "storelightstate": true    }},{"address":"/groups/5/action","method":"PUT","body":{     "bri_inc": -128    }},{"address":"/sensors/63/state","method":"PUT","body":{     "status": 2    }}]}' http://${HUE_IP}/api/${HUE_USER}/rules/119/
 curl -s -H "Accept: application/json" -X PUT --data '{"name":"MotionSensor 30.dim-backup","conditions":[{"address":"/sensors/30/state/presence","operator":"eq","value":"false"},{"address":"/sensors/30/state/presence","operator":"ddx","value":"PT00:09:15"},{"address":"/groups/7/state/any_on","operator":"eq","value":"true"}],"actions":[{"address":"/scenes/--84gUFKu7EVuFe","method":"PUT","body":{     "storelightstate": true    }},{"address":"/groups/7/action","method":"PUT","body":{     "bri_inc": -128    }},{"address":"/sensors/3/state","method":"PUT","body":{     "status": 2    }}]}' http://${HUE_IP}/api/${HUE_USER}/rules/120/
 
-curl -s -H "Accept: application/json" -X DELETE http://${HUE_IP}/api/${HUE_USER}/rules/121
+#curl -s -H "Accept: application/json" -X DELETE http://${HUE_IP}/api/${HUE_USER}/rules/121
 
-curl -s -H "Accept: application/json" -X POST --data '{"name":"TEST2","conditions":[{"address":"/sensors/41/state/presence","operator":"eq","value":"true"},{"address":"/sensors/41/state/presence","operator":"dx"}],"actions":[{"address":"/groups/11/action","method":"PUT","body":{"scene": "JpsE2311TGWeCc4"}}]}' http://${HUE_IP}/api/${HUE_USER}/rules/
+#curl -s -H "Accept: application/json" -X POST --data '{"name":"TEST2","conditions":[{"address":"/sensors/41/state/presence","operator":"eq","value":"true"},{"address":"/sensors/41/state/presence","operator":"dx"}],"actions":[{"address":"/groups/11/action","method":"PUT","body":{"scene": "JpsE2311TGWeCc4"}}]}' http://${HUE_IP}/api/${HUE_USER}/rules/
 
 echo "$(date): Script finished succesfully" >> HueBridgeLog
