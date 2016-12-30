@@ -53,6 +53,12 @@ TRG_WOONKAMER=4
 
 echo "$(date): Script started with IP ${HUE_IP} and used ${HUE_USER}" >> HueBridgeLog
 
+x=1
+while x < 2; do
+echo x
+x=x+1
+done
+
 curl -s -H "Accept: application/json" -X DELETE http://${HUE_IP}/api/${HUE_USER}/rules/1
 curl -s -H "Accept: application/json" -X DELETE http://${HUE_IP}/api/${HUE_USER}/rules/2
 curl -s -H "Accept: application/json" -X DELETE http://${HUE_IP}/api/${HUE_USER}/rules/3
