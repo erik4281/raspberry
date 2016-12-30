@@ -3,7 +3,7 @@
 HUE_IP=$(curl https://www.meethue.com/api/nupnp 2> /dev/null | jq -r ".[0].internalipaddress")
 HUE_USER=erikvennink
 
-#GROUPS + SCENES
+#GROUPS
 GRP_WOONKAMER=1
 GRP_KEUKEN=2
 GRP_HAL=3
@@ -15,6 +15,7 @@ GRP_FANNORMAAL=8
 GRP_FANHOOG=9
 GRP_BEVOCHTIGER=10
 GRP_DAGVERLICHTING=11
+PRESENCE=57
 
 #SENSORS
 TAP_WOONKAMER=2
