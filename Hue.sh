@@ -16,7 +16,7 @@ PUSHOVER_NOTIFICATION_MESSAGE_ON="Home ON"
 PUSHOVER_NOTIFICATION_MESSAGE_OFF="Home OFF"
 
 HOME_STATE=0 # Assumes home is off when script starts. Will correct itself
-MOTION_STATE=0 # Assumes home is off when script starts. Will correct itself
+#MOTION_STATE=0 # Assumes home is off when script starts. Will correct itself
 
 SKIP=1
 
@@ -25,7 +25,7 @@ echo "$(date): Script started with IP ${HUE_IP} and user ${HUE_USER}" >> HueLog
 while true; do
 
 HOME_OLD=${HOME_STATE}
-MOTION_OLD=${MOTION_STATE}
+#MOTION_OLD=${MOTION_STATE}
 
 CHECK_LIGHTS=$(curl -s -silent -H "Accept: application/json" -X GET http://${HUE_IP}/api/${HUE_USER}/sensors/57/ | grep '{"state":{"presence":true')
 #CHECK_MOTION=$(curl -s -silent -H "Accept: application/json" -X GET http://${HUE_IP}/api/${HUE_USER}/sensors/ | grep '{"state":{"presence":true')
@@ -44,8 +44,8 @@ fi
 
 #echo "$(date): Home State was ${HOME_OLD}, is now ${HOME_STATE}. Motion State was ${MOTION_OLD}, is now ${MOTION_STATE}." >> log
 
-#if [[ ${HOME_STATE} = ${HOME_OLD} ]]; then
-  #HOME_STATE=${HOME_OLD}
+if [[ ${HOME_STATE} = ${HOME_OLD} ]]; then
+  HOME_STATE=${HOME_OLD}
   #echo "Home state not changed"
   #if [[ ${HOME_STATE} = 0 ]]; then
     #if [[ ${MOTION_STATE} = ${MOTION_OLD} ]]; then
@@ -60,8 +60,8 @@ fi
       #fi
     #fi
   #fi
-#elif [[ ${SKIP} = 0 ]]; then
-if [[ ${SKIP} = 0 ]]; then
+elif [[ ${SKIP} = 0 ]]; then
+#if [[ ${SKIP} = 0 ]]; then
   #echo "Home state changed and not skipping"
   if [[ ${HOME_STATE} = 1 ]]; then
     echo "$(date): Home state changed to ON" >> HueLog
