@@ -4,7 +4,7 @@ HUE_IP=$(curl https://www.meethue.com/api/nupnp 2> /dev/null | jq -r ".[0].inter
 HUE_USER=erikvennink
 
 #TIMESLOTS
-DAYTIME='{"address":"/config/localtime","operator":"in","value":"T06:00:00/T00:00:00"}'
+DAYTIME={"address":"/config/localtime","operator":"in","value":"T06:00:00/T00:00:00"}
 NIGHTTIME='{"address":"/config/localtime","operator":"in","value":"T00:00:00/T06:00:00"}'
 
 #GROUPS + SCENES
