@@ -27,7 +27,7 @@ while true; do
 HOME_OLD=${HOME_STATE}
 MOTION_OLD=${MOTION_STATE}
 
-CHECK_LIGHTS=$(curl -s -silent -H "Accept: application/json" -X GET http://${HUE_IP}/api/${HUE_USER}/lights/33/ | grep '{"state":{"on":true')
+CHECK_LIGHTS=$(curl -s -silent -H "Accept: application/json" -X GET http://${HUE_IP}/api/${HUE_USER}/sensors/57/ | grep '{"state":{"on":true')
 CHECK_MOTION=$(curl -s -silent -H "Accept: application/json" -X GET http://${HUE_IP}/api/${HUE_USER}/sensors/ | grep '{"state":{"presence":true')
 
 if [ "${CHECK_LIGHTS}" ]; then
@@ -84,7 +84,7 @@ elif [[ ${SKIP} = 0 ]]; then
   curl -s -silent -H "Accept: application/json" -X PUT --data '{"on":true}' http://${HUE_IP}/api/${HUE_USER}/sensors/22/config
   curl -s -silent -H "Accept: application/json" -X PUT --data '{"on":true}' http://${HUE_IP}/api/${HUE_USER}/sensors/23/config
   curl -s -silent -H "Accept: application/json" -X PUT --data '{"on":true}' http://${HUE_IP}/api/${HUE_USER}/sensors/30/config
-  curl -s -silent -H "Accept: application/json" -X PUT --data '{"on":true}' http://${HUE_IP}/api/${HUE_USER}/sensors/3/config
+  curl -s -silent -H "Accept: application/json" -X PUT --data '{"on":true}' http://${HUE_IP}/api/${HUE_USER}/sensors/37/config
 fi
 
 SKIP=0
