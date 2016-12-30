@@ -58,6 +58,8 @@ MOT_BADKAMER_TEMP=39
 REMOTE=9
 TRG_WOONKAMER=4
 
+echo ${DAYTIME}
+
 echo "$(date): TESTScript started with IP ${HUE_IP} and used ${HUE_USER}" >> HueBridgeLog
 
 curl -s -H "Accept: application/json" -X PUT --data '{"name":"MotionSensor 41.day-on","conditions":[{"address":"/config/localtime","operator":"in","value":"T06:00:00/T00:00:00"},{"address":"/sensors/57/state/presence","operator":"eq","value":"true"},{"address":"/sensors/57/state/presence","operator":"dx"},{"address":"/sensors/55/state/status","operator":"lt","value":"1"},{"address":"/sensors/42/state/dark","operator":"eq","value":"true"}],"actions":[{"address":"/groups/1/action","method":"PUT","body":{     "scene": "lY5rBuP7YPzNSxR"    }},{"address":"/groups/11/action","method":"PUT","body":{     "scene": "JpsE2311TGWeCc4"    }},{"address":"/sensors/55/state","method":"PUT","body":{     "status": 1    }}]}' http://${HUE_IP}/api/${HUE_USER}/rules/1/
