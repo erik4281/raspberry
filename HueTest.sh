@@ -58,7 +58,7 @@ MOT_BADKAMER_TEMP=39
 REMOTE=9
 TRG_WOONKAMER=4
 
-echo ${DAYTIME}
+echo $DAYTIME
 
 echo "$(date): TESTScript started with IP ${HUE_IP} and used ${HUE_USER}" >> HueBridgeLog
 
