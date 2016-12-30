@@ -20,15 +20,15 @@ MOTION_STATE=0 # Assumes home is off when script starts. Will correct itself
 
 SKIP=1
 
-echo "$(date): Script started with IP ${HUE_IP} and used ${HUE_USER}" >> HueLog
+echo "$(date): Script started with IP ${HUE_IP} and user ${HUE_USER}" >> HueLog
 
 while true; do
 
 HOME_OLD=${HOME_STATE}
 MOTION_OLD=${MOTION_STATE}
 
-CHECK_LIGHTS=$(curl -s -silent -H "Accept: application/json" -X GET http://${HUE_IP}/api/${HUE_USER}/sensors/57/ | grep '{"state":{"on":true')
-CHECK_MOTION=$(curl -s -silent -H "Accept: application/json" -X GET http://${HUE_IP}/api/${HUE_USER}/sensors/ | grep '{"state":{"presence":true')
+CHECK_LIGHTS=$(curl -s -silent -H "Accept: application/json" -X GET http://${HUE_IP}/api/${HUE_USER}/sensors/57/ | grep '{"state":{"presence":true')
+#CHECK_MOTION=$(curl -s -silent -H "Accept: application/json" -X GET http://${HUE_IP}/api/${HUE_USER}/sensors/ | grep '{"state":{"presence":true')
 
 if [ "${CHECK_LIGHTS}" ]; then
   HOME_STATE=1
@@ -36,31 +36,32 @@ else
   HOME_STATE=0
 fi
 
-if [ "${CHECK_MOTION}" ]; then
-  MOTION_STATE=1
-else
-  MOTION_STATE=0
-fi
+#if [ "${CHECK_MOTION}" ]; then
+#  MOTION_STATE=1
+#else
+#  MOTION_STATE=0
+#fi
 
 #echo "$(date): Home State was ${HOME_OLD}, is now ${HOME_STATE}. Motion State was ${MOTION_OLD}, is now ${MOTION_STATE}." >> log
 
-if [[ ${HOME_STATE} = ${HOME_OLD} ]]; then
-  HOME_STATE=${HOME_OLD}
+#if [[ ${HOME_STATE} = ${HOME_OLD} ]]; then
+  #HOME_STATE=${HOME_OLD}
   #echo "Home state not changed"
-  if [[ ${HOME_STATE} = 0 ]]; then
-    if [[ ${MOTION_STATE} = ${MOTION_OLD} ]]; then
+  #if [[ ${HOME_STATE} = 0 ]]; then
+    #if [[ ${MOTION_STATE} = ${MOTION_OLD} ]]; then
       #echo "Motion not changed"
-      MOTION_STATE=${MOTION_OLD}
-    elif [[ ${SKIP} = 0 ]]; then
+      #MOTION_STATE=${MOTION_OLD}
+    #elif [[ ${SKIP} = 0 ]]; then
       #echo "Motion changed and not skipping"
-      if [[ ${MOTION_STATE} = 1 ]]; then
-        echo "$(date): ALARM: Motion is ON" >> HueLog
-        curl -s -silent -F "token=${PUSHOVER_TOKEN}" -F "user=${PUSHOVER_USER}" -F "title=${PUSHOVER_ALARM_TITLE}" -F "message=${PUSHOVER_ALARM_MESSAGE}" https://api.pushover.net/1/messages.json
-        curl -s -silent -H "Accept: application/json" -X PUT --data '{"on":true}' http://${HUE_IP}/api/${HUE_USER}/lights/33/state
-      fi
-    fi
-  fi
-elif [[ ${SKIP} = 0 ]]; then
+      #if [[ ${MOTION_STATE} = 1 ]]; then
+        #echo "$(date): ALARM: Motion is ON" >> HueLog
+        #curl -s -silent -F "token=${PUSHOVER_TOKEN}" -F "user=${PUSHOVER_USER}" -F "title=${PUSHOVER_ALARM_TITLE}" -F "message=${PUSHOVER_ALARM_MESSAGE}" https://api.pushover.net/1/messages.json
+        #curl -s -silent -H "Accept: application/json" -X PUT --data '{"on":true}' http://${HUE_IP}/api/${HUE_USER}/lights/33/state
+      #fi
+    #fi
+  #fi
+#elif [[ ${SKIP} = 0 ]]; then
+if [[ ${SKIP} = 0 ]]; then
   #echo "Home state changed and not skipping"
   if [[ ${HOME_STATE} = 1 ]]; then
     echo "$(date): Home state changed to ON" >> HueLog
