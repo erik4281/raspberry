@@ -57,7 +57,7 @@ echo "$(date): Script started with IP ${HUE_IP} and used ${HUE_USER}" >> HueBrid
 echo 'Sleeping for 3 seconds, then updating sensors'
 sleep 3
 
-curl -s -H "Accept: application/json" -X PUT --data '{"config":[{"tholddark": 20000}]}' http://${HUE_IP}/api/${HUE_USER}/sensors/13; echo
+curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 20000}}' http://${HUE_IP}/api/${HUE_USER}/sensors/13; echo
 
 echo "$(date): Script updated sensors" >> HueBridgeLog
 
