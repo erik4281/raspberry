@@ -54,15 +54,15 @@ TRG_WOONKAMER=4
 
 echo "$(date): Script started with IP ${HUE_IP} and used ${HUE_USER}" >> HueBridgeLog
 
-echo 'Sleeping for 10 seconds, then updating sensors'
-sleep 10
+echo 'Sleeping for 3 seconds, then updating sensors'
+sleep 3
 
 curl -s -H "Accept: application/json" -X PUT --data '{"config":[{"tholddark": 20000}]}' http://${HUE_IP}/api/${HUE_USER}/sensors/13; echo
 
 echo "$(date): Script updated sensors" >> HueBridgeLog
 
-echo 'Sleeping for 10 seconds, then deleting rules'
-sleep 10
+echo 'Sleeping for 3 seconds, then deleting rules'
+sleep 3
 
 i="1"
 
@@ -74,8 +74,8 @@ done
 
 echo "$(date): Script deleted rules" >> HueBridgeLog
 
-echo 'Sleeping for 10 seconds, then creating new rules'
-sleep 10
+echo 'Sleeping for 3 seconds, then creating new rules'
+sleep 3
 
 #Combined rules for motion in the living room, dining room, kitchen and hallway
 curl -s -H "Accept: application/json" -X POST --data '{"name":"MotionWoonkamer.always-on","conditions":[{"address":"/sensors/7/state/presence","operator":"eq","value":"true"},{"address":"/sensors/7/state/presence","operator":"dx"}],"actions":[{"address":"/groups/11/action","method":"PUT","body":{"scene":"JpsE2311TGWeCc4"}},{"address":"/sensors/4/state","method":"PUT","body":{"presence":true}},{"address":"/sensors/57/state","method":"PUT","body":{"presence":true}}]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
