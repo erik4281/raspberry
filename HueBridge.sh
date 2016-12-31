@@ -58,6 +58,13 @@ echo 'Sleeping for 3 seconds, then updating sensors'
 sleep 3
 
 curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 20000}}' http://${HUE_IP}/api/${HUE_USER}/sensors/13; echo
+curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 16000}}' http://${HUE_IP}/api/${HUE_USER}/sensors/17; echo
+curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 25000}}' http://${HUE_IP}/api/${HUE_USER}/sensors/21; echo
+curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 30000}}' http://${HUE_IP}/api/${HUE_USER}/sensors/25; echo
+curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 20000}}' http://${HUE_IP}/api/${HUE_USER}/sensors/29; echo
+curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 25000}}' http://${HUE_IP}/api/${HUE_USER}/sensors/33; echo
+curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 60000}}' http://${HUE_IP}/api/${HUE_USER}/sensors/37; echo
+curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 60000}}' http://${HUE_IP}/api/${HUE_USER}/sensors/39; echo
 
 echo "$(date): Script updated sensors" >> HueBridgeLog
 
