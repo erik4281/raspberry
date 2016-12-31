@@ -64,7 +64,7 @@ curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 300
 curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 20000}}' http://${HUE_IP}/api/${HUE_USER}/sensors/29; echo
 curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 25000}}' http://${HUE_IP}/api/${HUE_USER}/sensors/33; echo
 curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 60000}}' http://${HUE_IP}/api/${HUE_USER}/sensors/37; echo
-curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 60000}}' http://${HUE_IP}/api/${HUE_USER}/sensors/39; echo
+curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 60000}}' http://${HUE_IP}/api/${HUE_USER}/sensors/41; echo
 
 echo "$(date): Script updated sensors" >> HueBridgeLog
 
