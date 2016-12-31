@@ -1,7 +1,7 @@
 #!/bin/bash
 
 HUE_IP=$(curl https://www.meethue.com/api/nupnp 2> /dev/null | jq -r ".[0].internalipaddress")
-HUE_USER=erikvennink
+HUE_USER=vSuYBJAton1scEhPyDf4ep85GgmRyFvjJfBjYHIC
 
 #GROUPS
 GRP_WOONKAMER=1
