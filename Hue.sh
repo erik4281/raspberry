@@ -5,7 +5,7 @@ sleep 10
 
 HUE_IP=$(curl https://www.meethue.com/api/nupnp 2> /dev/null | jq -r ".[0].internalipaddress")
 #HUE_IP=192.168.1.11
-HUE_USER=erikvennink
+HUE_USER=vSuYBJAton1scEhPyDf4ep85GgmRyFvjJfBjYHIC
 
 PUSHOVER_TOKEN=azw2c2dw29x8o96ae2m2cp5gtx7mr4
 PUSHOVER_USER=uPnTmp5puvngjiUYpGMGQ3AgUKjhgZ
