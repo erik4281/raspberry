@@ -3,6 +3,9 @@
 HUE_IP=$(curl https://www.meethue.com/api/nupnp 2> /dev/null | jq -r ".[0].internalipaddress")
 HUE_USER=vSuYBJAton1scEhPyDf4ep85GgmRyFvjJfBjYHIC
 
+echo 'Sleeping for 10 seconds'
+sleep 10
+
 #GROUPS
 GRP_WOONKAMER=1
 GRP_KEUKEN=2
@@ -61,6 +64,9 @@ do
 curl -s -H "Accept: application/json" -X DELETE http://${HUE_IP}/api/${HUE_USER}/rules/$i; echo
 i=$[$i+1]
 done
+
+echo 'Sleeping for 10 seconds'
+sleep 10
 
 #Combined rules for motion in the living room, dining room, kitchen and hallway
 curl -s -H "Accept: application/json" -X POST --data '{"name":"MotionWoonkamer.always-on","conditions":[{"address":"/sensors/7/state/presence","operator":"eq","value":"true"},{"address":"/sensors/7/state/presence","operator":"dx"}],"actions":[{"address":"/groups/11/action","method":"PUT","body":{"scene":"JpsE2311TGWeCc4"}},{"address":"/sensors/4/state","method":"PUT","body":{"presence":true}},{"address":"/sensors/57/state","method":"PUT","body":{"presence":true}}]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
