@@ -3,9 +3,6 @@
 HUE_IP=$(curl https://www.meethue.com/api/nupnp 2> /dev/null | jq -r ".[0].internalipaddress")
 HUE_USER=vSuYBJAton1scEhPyDf4ep85GgmRyFvjJfBjYHIC
 
-echo 'Sleeping for 10 seconds'
-sleep 10
-
 #GROUPS
 GRP_WOONKAMER=1
 GRP_KEUKEN=2
@@ -57,6 +54,16 @@ TRG_WOONKAMER=4
 
 echo "$(date): Script started with IP ${HUE_IP} and used ${HUE_USER}" >> HueBridgeLog
 
+echo 'Sleeping for 10 seconds, then updating sensors'
+sleep 10
+
+curl -s -H "Accept: application/json" -X PUT --data '{{"config": {"tholddark": 20000}}}' http://${HUE_IP}/api/${HUE_USER}/sensors/13; echo
+
+echo "$(date): Script updated sensors" >> HueBridgeLog
+
+echo 'Sleeping for 10 seconds, then deleting rules'
+sleep 10
+
 i="1"
 
 while [ $i -lt 125 ]
@@ -65,7 +72,9 @@ curl -s -H "Accept: application/json" -X DELETE http://${HUE_IP}/api/${HUE_USER}
 i=$[$i+1]
 done
 
-echo 'Sleeping for 10 seconds'
+echo "$(date): Script deleted rules" >> HueBridgeLog
+
+echo 'Sleeping for 10 seconds, then creating new rules'
 sleep 10
 
 #Combined rules for motion in the living room, dining room, kitchen and hallway
@@ -214,5 +223,7 @@ curl -s -H "Accept: application/json" -X POST --data '{"name":"Dimmer 9.2 Lights
 curl -s -H "Accept: application/json" -X POST --data '{"name":"Dimmer 9.2 Lights","conditions":[{"address":"/sensors/9/state/lastupdated","operator":"dx"},{"address":"/sensors/9/state/buttonevent","operator":"eq","value":"2003"}],"actions":[{"address":"/groups/1/action","method":"PUT","body":{"bri_inc":0}}]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
 curl -s -H "Accept: application/json" -X POST --data '{"name":"Dimmer 9.4 Lights","conditions":[{"address":"/sensors/9/state/lastupdated","operator":"dx"},{"address":"/sensors/9/state/buttonevent","operator":"eq","value":"4000"}],"actions":[{"address":"/groups/1/action","method":"PUT","body":{"on":false}},{"address":"/sensors/60/state","method":"PUT","body":{"status":0}}]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
 curl -s -H "Accept: application/json" -X POST --data '{"name":"Dimmer Switch 9 reset timer","conditions":[{"address":"/sensors/9/state/lastupdated","operator":"dx"}],"actions":[{"address":"/schedules/1","method":"PUT","body":{"status":"enabled"}}]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
+
+echo "$(date): Script created new rules" >> HueBridgeLog
 
 echo "$(date): Script finished succesfully" >> HueBridgeLog
