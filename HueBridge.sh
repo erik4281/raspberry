@@ -24,7 +24,7 @@ sleep 3
 
 i="1"
 
-while [ $i -lt 125 ]
+while [ $i -lt 140 ]
 do
 curl -s -H "Accept: application/json" -X DELETE http://${HUE_IP}/api/${HUE_USER}/rules/$i; echo
 i=$[$i+1]
@@ -111,7 +111,7 @@ curl -s -H "Accept: application/json" -X POST --data '{"name":"MotionCombined.ni
 curl -s -H "Accept: application/json" -X POST --data '{"name":"MotionCombined.dim","conditions":[{"address":"/sensors/44/state/presence","operator":"eq","value":"false"},{"address":"/sensors/44/state/presence","operator":"ddx","value":"PT00:09:15"},{"address":"/groups/1/state/any_on","operator":"eq","value":"true"}],"actions":[{"address":"/scenes/seVXODwWmPCOWT5","method":"PUT","body":{"storelightstate":true}},{"address":"/groups/2/action","method":"PUT","body":{"bri_inc":-128}},{"address":"/groups/1/action","method":"PUT","body":{"bri_inc":-128}},{"address":"/sensors/14/state","method":"PUT","body":{"status":2}}]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
 curl -s -H "Accept: application/json" -X POST --data '{"name":"MotionCombined.recover","conditions":[{"address":"/sensors/44/state/presence","operator":"eq","value":"true"},{"address":"/sensors/44/state/presence","operator":"dx"},{"address":"/sensors/14/state/status","operator":"gt","value":"1"}],"actions":[{"address":"/groups/2/action","method":"PUT","body":{"scene":"seVXODwWmPCOWT5"}},{"address":"/groups/1/action","method":"PUT","body":{"scene":"2X7964HVeAruuQY"}},{"address":"/sensors/14/state","method":"PUT","body":{"status":1}}]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
 curl -s -H "Accept: application/json" -X POST --data '{"name":"MotionCombined.off","conditions":[{"address":"/sensors/44/state/presence","operator":"eq","value":"false"},{"address":"/sensors/14/state/status","operator":"ddx","value":"PT00:00:30"},{"address":"/sensors/14/state/status","operator":"gt","value":"1"}],"actions":[{"address":"/groups/2/action","method":"PUT","body":{"on":false}},{"address":"/groups/1/action","method":"PUT","body":{"on":false}},{"address":"/sensors/14/state","method":"PUT","body":{"status":0}}]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
-curl -s -H "Accept: application/json" -X POST --data '{"name":"MotionCombined.arm","conditions":[,{"address":"/groups/2/state/any_on","operator":"eq","value":"false"},{"address":"/sensors/44/state/presence","operator":"eq","value":"false"}],"actions":[{"address":"/sensors/14/state","method":"PUT","body":{"status":0}}]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
+curl -s -H "Accept: application/json" -X POST --data '{"name":"MotionCombined.arm","conditions":[{"address":"/groups/2/state/any_on","operator":"eq","value":"false"},{"address":"/sensors/44/state/presence","operator":"eq","value":"false"}],"actions":[{"address":"/sensors/14/state","method":"PUT","body":{"status":0}}]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
 curl -s -H "Accept: application/json" -X POST --data '{"name":"MotionCombined.dark-off","conditions":[{"address":"/sensors/13/state/lightlevel","operator":"gt","value":"22500"},{"address":"/sensors/13/state/lightlevel","operator":"dx"}],"actions":[{"address":"/groups/2/action","method":"PUT","body":{"on": false}},{"address":"/sensors/14/state","method":"PUT","body":{"status":0}}]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
 
 #Kitchen lights based on Kitchen motion
