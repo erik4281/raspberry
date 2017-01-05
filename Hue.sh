@@ -1,5 +1,5 @@
 #!/bin/bash
-DELAY_BETWEEN_CHECKS=15
+DELAY_BETWEEN_CHECKS=5
 
 sleep 10
 
