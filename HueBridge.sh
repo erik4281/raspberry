@@ -1,9 +1,10 @@
 #!/bin/bash
+VERSION="1701.4"
 
 HUE_IP=$(curl https://www.meethue.com/api/nupnp 2> /dev/null | jq -r ".[0].internalipaddress")
 HUE_USER=vSuYBJAton1scEhPyDf4ep85GgmRyFvjJfBjYHIC
 
-echo "$(date): Script version 1701.4 started with IP ${HUE_IP} and used ${HUE_USER}" >> HueBridgeLog
+echo "$(date): Script version ${VERSION} started with IP ${HUE_IP} and used ${HUE_USER}" >> HueBridgeLog
 
 echo 'Sleeping for 3 seconds, then updating sensors'
 sleep 3
