@@ -16,7 +16,7 @@ HOME_STATE=0 # Assumes home is off when script starts. Will correct itself
 
 SKIP=1
 
-echo "$(date): Script started with IP ${HUE_IP} and user ${HUE_USER}" >> HueLog
+echo "$(date): Script version 1701.4 started with IP ${HUE_IP} and user ${HUE_USER}" >> HueLog
 
 while true; do
 
