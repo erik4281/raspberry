@@ -14,3 +14,7 @@ echo "$(date): Script version ${VERSION} started with IP ${HUE_IP} and user ${HU
 while true; do
 
 curl -s -silent -H "Accept: application/json" -X GET http://${HUE_IP}/api/${HUE_USER}/ > HueState
+
+sleep ${DELAY_BETWEEN_CHECKS}
+
+done
