@@ -1,5 +1,5 @@
 #!/bin/bash
-VERSION="1712.6"
+VERSION="1715.7"
 
 HUE_IP=$(curl https://www.meethue.com/api/nupnp 2> /dev/null | jq -r ".[0].internalipaddress")
 HUE_USER=vSuYBJAton1scEhPyDf4ep85GgmRyFvjJfBjYHIC
@@ -125,7 +125,7 @@ curl -s -H "Accept: application/json" -X POST --data '{"name":"MotionKeuken.dim"
 curl -s -H "Accept: application/json" -X POST --data '{"name":"MotionKeuken.recover","conditions":[{"address":"/sensors/20/state/presence","operator":"eq","value":"true"},{"address":"/sensors/20/state/presence","operator":"dx"},{"address":"/sensors/22/state/status","operator":"gt","value":"1"}],"actions":[{"address":"/groups/3/action","method":"PUT","body":{"scene":"sd7ricBubAdwa1O"}},{"address":"/sensors/22/state","method":"PUT","body":{"status":1}}]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
 curl -s -H "Accept: application/json" -X POST --data '{"name":"MotionKeuken.off","conditions":[{"address":"/sensors/20/state/presence","operator":"eq","value":"false"},{"address":"/sensors/22/state/status","operator":"ddx","value":"PT00:00:30"},{"address":"/sensors/22/state/status","operator":"gt","value":"1"}],"actions":[{"address":"/groups/3/action","method":"PUT","body":{"on":false}},{"address":"/sensors/22/state","method":"PUT","body":{"status":0}}]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
 curl -s -H "Accept: application/json" -X POST --data '{"name":"MotionKeuken.arm","conditions":[{"address":"/groups/3/state/any_on","operator":"eq","value":"false"},{"address":"/sensors/20/state/presence","operator":"eq","value":"false"}],"actions":[{"address":"/sensors/22/state","method":"PUT","body":{"status":0}}]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
-curl -s -H "Accept: application/json" -X POST --data '{"name":"MotionKeuken.dark-off","conditions":[{"address":"/sensors/17/state/lightlevel","operator":"gt","value":"35000"},{"address":"/sensors/17/state/lightlevel","operator":"dx"}],"actions":[{"address":"/groups/3/action","method":"PUT","body":{"on": false}},{"address":"/sensors/18/state","method":"PUT","body":{"status":0}}]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
+curl -s -H "Accept: application/json" -X POST --data '{"name":"MotionKeuken.dark-off","conditions":[{"address":"/sensors/17/state/lightlevel","operator":"gt","value":"35000"},{"address":"/sensors/17/state/lightlevel","operator":"dx"}],"actions":[{"address":"/groups/3/action","method":"PUT","body":{"on": false}},{"address":"/sensors/22/state","method":"PUT","body":{"status":0}}]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
 curl -s -H "Accept: application/json" -X POST --data '{"name":"MotionKeuken.fan-off","conditions":[{"address":"/sensors/20/state/presence","operator":"eq","value":"false"},{"address":"/sensors/20/state/presence","operator":"ddx","value":"PT00:25:00"}],"actions":[{"address":"/lights/17/state","method":"PUT","body":{"on":false}}]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
 
 #Hallway lights based on Hallway motion
