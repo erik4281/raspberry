@@ -9,30 +9,14 @@ echo "$(date): Script version ${VERSION} started with IP ${HUE_IP} and user ${HU
 echo 'Sleeping for 3 seconds, then updating sensors'
 sleep 3
 
-curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 17500}}' http://${HUE_IP}/api/${HUE_USER}\
-/sensors/13; echo
-
-curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 17500}}' http://${HUE_IP}/api/${HUE_USER}\
-/sensors/17; echo
-
-curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 25000}}' http://${HUE_IP}/api/${HUE_USER}\
-/sensors/21; echo
-
-curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 60000}}' http://${HUE_IP}/api/${HUE_USER}\
-/sensors/25; echo
-
-curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 17500}}' http://${HUE_IP}/api/${HUE_USER}\
-/sensors/29; echo
-
-curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 25000}}' http://${HUE_IP}/api/${HUE_USER}\
-/sensors/33; echo
-
-curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 60000}}' http://${HUE_IP}/api/${HUE_USER}\
-/sensors/37; echo
-
-curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 60000}}' http://${HUE_IP}/api/${HUE_USER}\
-/sensors/41; echo
-
+curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 17500}}' http://${HUE_IP}/api/${HUE_USER}/sensors/13; echo
+curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 17500}}' http://${HUE_IP}/api/${HUE_USER}/sensors/17; echo
+curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 25000}}' http://${HUE_IP}/api/${HUE_USER}/sensors/21; echo
+curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 60000}}' http://${HUE_IP}/api/${HUE_USER}/sensors/25; echo
+curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 17500}}' http://${HUE_IP}/api/${HUE_USER}/sensors/29; echo
+curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 25000}}' http://${HUE_IP}/api/${HUE_USER}/sensors/33; echo
+curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 60000}}' http://${HUE_IP}/api/${HUE_USER}/sensors/37; echo
+curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 60000}}' http://${HUE_IP}/api/${HUE_USER}/sensors/41; echo
 
 echo "$(date): Script updated sensors" >> HueBridgeLog
 
@@ -52,21 +36,24 @@ echo "$(date): Script deleted rules" >> HueBridgeLog
 echo 'Sleeping for 3 seconds, then creating new rules'
 sleep 3
 
+CURL = 'curl -s -H "Accept: application/json" -X POST --data '
+NAME = '\'{"name":'
+CONDITIONS = ',"conditions":['
+C = ','
+ACTIONS = '],"actions":['
+WRAP = ']}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo'
+
+NT1.1 = '"TapWoonkamer.1.2"'
+C2LA = '{"address":"/sensors/2/state/lastupdated","operator":"dx"}'
+C2B34 = '{"address":"/sensors/2/state/buttonevent","operator":"eq","value":"34"}'
+C2ONTRUE = '{"address":"/groups/2/state/any_on","operator":"eq","value":"true"}'
+A2OFF = {"address":"/groups/2/action","method":"PUT","body":{"on":false,"transitiontime":50}}
+A3OFF = {"address":"/groups/3/action","method":"PUT","body":{"on":false,"transitiontime":50}}
+A12ON = {"address":"/sensors/12/config","method":"PUT","body":{"on":true}}
+A20ON = {"address":"/sensors/20/config","method":"PUT","body":{"on":true}}
 
 #Living room lights based on Living TAP
-curl -s -H "Accept: application/json" -X POST --data '{\
-"name":"TapWoonkamer.1.1",\
-"conditions":[\
-{"address":"/sensors/2/state/lastupdated","operator":"dx"},\
-{"address":"/sensors/2/state/buttonevent","operator":"eq","value":"34"},\
-{"address":"/groups/2/state/any_on","operator":"eq","value":"true"}\
-],\
-"actions":[\
-{"address":"/groups/2/action","method":"PUT","body":{"on":false,"transitiontime":50}},\
-{"address":"/groups/3/action","method":"PUT","body":{"on":false,"transitiontime":50}},\
-{"address":"/sensors/12/config","method":"PUT","body":{"on":true}},\
-{"address":"/sensors/20/config","method":"PUT","body":{"on":true}}\
-]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
+${CURL}+{NAME}+${NT1.1}${CONDITIONS}+${C2LA}+${C}+${C2B34}+${C}+${C2ONTRUE}+${ACTIONS}+${A2OFF}+${C}+${A3OFF}+${C}+${A12ON}+${C}+${A20ON}+${WRAP}
 
 curl -s -H "Accept: application/json" -X POST --data '{\
 "name":"TapWoonkamer.1.2",\
