@@ -11,13 +11,27 @@ sleep 3
 
 curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 17500}}' http://${HUE_IP}/api/${HUE_USER}\
 /sensors/13; echo
-curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 17500}}' http://${HUE_IP}/api/${HUE_USER}/sensors/17; echo
-curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 25000}}' http://${HUE_IP}/api/${HUE_USER}/sensors/21; echo
-curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 60000}}' http://${HUE_IP}/api/${HUE_USER}/sensors/25; echo
-curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 17500}}' http://${HUE_IP}/api/${HUE_USER}/sensors/29; echo
-curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 25000}}' http://${HUE_IP}/api/${HUE_USER}/sensors/33; echo
-curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 60000}}' http://${HUE_IP}/api/${HUE_USER}/sensors/37; echo
-curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 60000}}' http://${HUE_IP}/api/${HUE_USER}/sensors/41; echo
+
+curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 17500}}' http://${HUE_IP}/api/${HUE_USER}\
+/sensors/17; echo
+
+curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 25000}}' http://${HUE_IP}/api/${HUE_USER}\
+/sensors/21; echo
+
+curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 60000}}' http://${HUE_IP}/api/${HUE_USER}\
+/sensors/25; echo
+
+curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 17500}}' http://${HUE_IP}/api/${HUE_USER}\
+/sensors/29; echo
+
+curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 25000}}' http://${HUE_IP}/api/${HUE_USER}\
+/sensors/33; echo
+
+curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 60000}}' http://${HUE_IP}/api/${HUE_USER}\
+/sensors/37; echo
+
+curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 60000}}' http://${HUE_IP}/api/${HUE_USER}\
+/sensors/41; echo
 
 echo "$(date): Script updated sensors" >> HueBridgeLog
 
@@ -38,7 +52,17 @@ echo 'Sleeping for 3 seconds, then creating new rules'
 sleep 3
 
 #Living room lights based on Living TAP
-curl -s -H "Accept: application/json" -X POST --data '{"name":"TapWoonkamer.1.1","conditions":[{"address":"/sensors/2/state/lastupdated","operator":"dx"},{"address":"/sensors/2/state/buttonevent","operator":"eq","value":"34"},{"address":"/groups/2/state/any_on","operator":"eq","value":"true"}],"actions":[{"address":"/groups/2/action","method":"PUT","body":{"on":false,"transitiontime":50}},{"address":"/groups/3/action","method":"PUT","body":{"on":false,"transitiontime":50}},{"address":"/sensors/12/config","method":"PUT","body":{"on":true}},{"address":"/sensors/20/config","method":"PUT","body":{"on":true}}]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
+curl -s -H "Accept: application/json" -X POST --data '{"name":"TapWoonkamer.1.1",\
+"conditions":[\
+{"address":"/sensors/2/state/lastupdated","operator":"dx"},\
+{"address":"/sensors/2/state/buttonevent","operator":"eq","value":"34"},\
+{"address":"/groups/2/state/any_on","operator":"eq","value":"true"}],\
+"actions":[\
+{"address":"/groups/2/action","method":"PUT","body":{"on":false,"transitiontime":50}},\
+{"address":"/groups/3/action","method":"PUT","body":{"on":false,"transitiontime":50}},\
+{"address":"/sensors/12/config","method":"PUT","body":{"on":true}},\
+{"address":"/sensors/20/config","method":"PUT","body":{"on":true}}]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
+
 curl -s -H "Accept: application/json" -X POST --data '{"name":"TapWoonkamer.1.2","conditions":[{"address":"/sensors/2/state/lastupdated","operator":"dx"},{"address":"/sensors/2/state/buttonevent","operator":"eq","value":"34"},{"address":"/groups/2/state/any_on","operator":"eq","value":"false"}],"actions":[{"address":"/groups/1/action","method":"PUT","body":{"on":false,"transitiontime":30}},{"address":"/groups/2/action","method":"PUT","body":{"on":false,"transitiontime":50}},{"address":"/groups/3/action","method":"PUT","body":{"on":false,"transitiontime":50}},{"address":"/sensors/12/config","method":"PUT","body":{"on":true}},{"address":"/sensors/20/config","method":"PUT","body":{"on":true}}]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
 curl -s -H "Accept: application/json" -X POST --data '{"name":"TapWoonkamer.2","conditions":[{"address":"/sensors/2/state/lastupdated","operator":"dx"},{"address":"/sensors/2/state/buttonevent","operator":"eq","value":"16"}],"actions":[{"address":"/groups/1/action","method":"PUT","body":{"scene":"2X7964HVeAruuQY"}},{"address":"/groups/2/action","method":"PUT","body":{"scene":"GFhk2PPK-24Ztpc"}},{"address":"/groups/3/action","method":"PUT","body":{"scene":"EVf24QboVUqvcbW"}},{"address":"/sensors/12/config","method":"PUT","body":{"on":false}},{"address":"/sensors/20/config","method":"PUT","body":{"on":false}}]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
 curl -s -H "Accept: application/json" -X POST --data '{"name":"TapWoonkamer.3","conditions":[{"address":"/sensors/2/state/lastupdated","operator":"dx"},{"address":"/sensors/2/state/buttonevent","operator":"eq","value":"17"}],"actions":[{"address":"/groups/1/action","method":"PUT","body":{"scene":"2X7964HVeAruuQY"}},{"address":"/groups/2/action","method":"PUT","body":{"on":false}},{"address":"/groups/3/action","method":"PUT","body":{"scene":"EVf24QboVUqvcbW"}},{"address":"/sensors/12/config","method":"PUT","body":{"on":false}},{"address":"/sensors/20/config","method":"PUT","body":{"on":false}}]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
