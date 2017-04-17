@@ -9,7 +9,8 @@ echo "$(date): Script version ${VERSION} started with IP ${HUE_IP} and user ${HU
 echo 'Sleeping for 3 seconds, then updating sensors'
 sleep 3
 
-curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 17500}}' http://${HUE_IP}/api/${HUE_USER}/sensors/13; echo
+curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 17500}}' http://${HUE_IP}/api/${HUE_USER}\
+/sensors/13; echo
 curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 17500}}' http://${HUE_IP}/api/${HUE_USER}/sensors/17; echo
 curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 25000}}' http://${HUE_IP}/api/${HUE_USER}/sensors/21; echo
 curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 60000}}' http://${HUE_IP}/api/${HUE_USER}/sensors/25; echo
