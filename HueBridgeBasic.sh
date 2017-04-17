@@ -33,6 +33,7 @@ curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 600
 curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 60000}}' http://${HUE_IP}/api/${HUE_USER}\
 /sensors/41; echo
 
+
 echo "$(date): Script updated sensors" >> HueBridgeLog
 
 echo 'Sleeping for 3 seconds, then deleting rules'
@@ -51,28 +52,124 @@ echo "$(date): Script deleted rules" >> HueBridgeLog
 echo 'Sleeping for 3 seconds, then creating new rules'
 sleep 3
 
+
 #Living room lights based on Living TAP
-curl -s -H "Accept: application/json" -X POST --data '{"name":"TapWoonkamer.1.1",\
+curl -s -H "Accept: application/json" -X POST --data '{\
+"name":"TapWoonkamer.1.1",\
 "conditions":[\
 {"address":"/sensors/2/state/lastupdated","operator":"dx"},\
 {"address":"/sensors/2/state/buttonevent","operator":"eq","value":"34"},\
-{"address":"/groups/2/state/any_on","operator":"eq","value":"true"}],\
+{"address":"/groups/2/state/any_on","operator":"eq","value":"true"}\
+],\
 "actions":[\
 {"address":"/groups/2/action","method":"PUT","body":{"on":false,"transitiontime":50}},\
 {"address":"/groups/3/action","method":"PUT","body":{"on":false,"transitiontime":50}},\
 {"address":"/sensors/12/config","method":"PUT","body":{"on":true}},\
-{"address":"/sensors/20/config","method":"PUT","body":{"on":true}}]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
+{"address":"/sensors/20/config","method":"PUT","body":{"on":true}}\
+]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
 
-curl -s -H "Accept: application/json" -X POST --data '{"name":"TapWoonkamer.1.2","conditions":[{"address":"/sensors/2/state/lastupdated","operator":"dx"},{"address":"/sensors/2/state/buttonevent","operator":"eq","value":"34"},{"address":"/groups/2/state/any_on","operator":"eq","value":"false"}],"actions":[{"address":"/groups/1/action","method":"PUT","body":{"on":false,"transitiontime":30}},{"address":"/groups/2/action","method":"PUT","body":{"on":false,"transitiontime":50}},{"address":"/groups/3/action","method":"PUT","body":{"on":false,"transitiontime":50}},{"address":"/sensors/12/config","method":"PUT","body":{"on":true}},{"address":"/sensors/20/config","method":"PUT","body":{"on":true}}]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
-curl -s -H "Accept: application/json" -X POST --data '{"name":"TapWoonkamer.2","conditions":[{"address":"/sensors/2/state/lastupdated","operator":"dx"},{"address":"/sensors/2/state/buttonevent","operator":"eq","value":"16"}],"actions":[{"address":"/groups/1/action","method":"PUT","body":{"scene":"2X7964HVeAruuQY"}},{"address":"/groups/2/action","method":"PUT","body":{"scene":"GFhk2PPK-24Ztpc"}},{"address":"/groups/3/action","method":"PUT","body":{"scene":"EVf24QboVUqvcbW"}},{"address":"/sensors/12/config","method":"PUT","body":{"on":false}},{"address":"/sensors/20/config","method":"PUT","body":{"on":false}}]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
-curl -s -H "Accept: application/json" -X POST --data '{"name":"TapWoonkamer.3","conditions":[{"address":"/sensors/2/state/lastupdated","operator":"dx"},{"address":"/sensors/2/state/buttonevent","operator":"eq","value":"17"}],"actions":[{"address":"/groups/1/action","method":"PUT","body":{"scene":"2X7964HVeAruuQY"}},{"address":"/groups/2/action","method":"PUT","body":{"on":false}},{"address":"/groups/3/action","method":"PUT","body":{"scene":"EVf24QboVUqvcbW"}},{"address":"/sensors/12/config","method":"PUT","body":{"on":false}},{"address":"/sensors/20/config","method":"PUT","body":{"on":false}}]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
-curl -s -H "Accept: application/json" -X POST --data '{"name":"TapWoonkamer.4","conditions":[{"address":"/sensors/2/state/lastupdated","operator":"dx"},{"address":"/sensors/2/state/buttonevent","operator":"eq","value":"18"}],"actions":[{"address":"/groups/1/action","method":"PUT","body":{"scene":"S3om3C2hhjyymAW"}},{"address":"/groups/2/action","method":"PUT","body":{"scene":"6hLiqYWJ3Xnor8s"}},{"address":"/groups/3/action","method":"PUT","body":{"scene":"Ya1-SihTfsUFXeH"}},{"address":"/sensors/12/config","method":"PUT","body":{"on":false}},{"address":"/sensors/20/config","method":"PUT","body":{"on":false}}]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
+curl -s -H "Accept: application/json" -X POST --data '{\
+"name":"TapWoonkamer.1.2",\
+"conditions":[{"address":"/sensors/2/state/lastupdated","operator":"dx"},\
+{"address":"/sensors/2/state/buttonevent","operator":"eq","value":"34"},\
+{"address":"/groups/2/state/any_on","operator":"eq","value":"false"}\
+],\
+"actions":[\
+{"address":"/groups/1/action","method":"PUT","body":{"on":false,"transitiontime":30}},\
+{"address":"/groups/2/action","method":"PUT","body":{"on":false,"transitiontime":50}},\
+{"address":"/groups/3/action","method":"PUT","body":{"on":false,"transitiontime":50}},\
+{"address":"/sensors/12/config","method":"PUT","body":{"on":true}},\
+{"address":"/sensors/20/config","method":"PUT","body":{"on":true}}\
+]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
+
+curl -s -H "Accept: application/json" -X POST --data '{\
+"name":"TapWoonkamer.2",\
+"conditions":[\
+{"address":"/sensors/2/state/lastupdated","operator":"dx"},\
+{"address":"/sensors/2/state/buttonevent","operator":"eq","value":"16"}\
+],\
+"actions":[\
+{"address":"/groups/1/action","method":"PUT","body":{"scene":"2X7964HVeAruuQY"}},\
+{"address":"/groups/2/action","method":"PUT","body":{"scene":"GFhk2PPK-24Ztpc"}},\
+{"address":"/groups/3/action","method":"PUT","body":{"scene":"EVf24QboVUqvcbW"}},\
+{"address":"/sensors/12/config","method":"PUT","body":{"on":false}},\
+{"address":"/sensors/20/config","method":"PUT","body":{"on":false}}\
+]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
+
+curl -s -H "Accept: application/json" -X POST --data '{\
+"name":"TapWoonkamer.3",\
+"conditions":[\
+{"address":"/sensors/2/state/lastupdated","operator":"dx"},\
+{"address":"/sensors/2/state/buttonevent","operator":"eq","value":"17"}\
+],\
+"actions":[\
+{"address":"/groups/1/action","method":"PUT","body":{"scene":"2X7964HVeAruuQY"}},\
+{"address":"/groups/2/action","method":"PUT","body":{"on":false}},\
+{"address":"/groups/3/action","method":"PUT","body":{"scene":"EVf24QboVUqvcbW"}},\
+{"address":"/sensors/12/config","method":"PUT","body":{"on":false}},\
+{"address":"/sensors/20/config","method":"PUT","body":{"on":false}}\
+]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
+
+curl -s -H "Accept: application/json" -X POST --data '{\
+"name":"TapWoonkamer.4",\
+"conditions":[\
+{"address":"/sensors/2/state/lastupdated","operator":"dx"},\
+{"address":"/sensors/2/state/buttonevent","operator":"eq","value":"18"}\
+],\
+"actions":[\
+{"address":"/groups/1/action","method":"PUT","body":{"scene":"S3om3C2hhjyymAW"}},\
+{"address":"/groups/2/action","method":"PUT","body":{"scene":"6hLiqYWJ3Xnor8s"}},\
+{"address":"/groups/3/action","method":"PUT","body":{"scene":"Ya1-SihTfsUFXeH"}},\
+{"address":"/sensors/12/config","method":"PUT","body":{"on":false}},\
+{"address":"/sensors/20/config","method":"PUT","body":{"on":false}}\
+]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
+
 
 #Kitchen lights based on Kitchen TAP
-curl -s -H "Accept: application/json" -X POST --data '{"name":"TapKeuken.1","conditions":[{"address":"/sensors/3/state/lastupdated","operator":"dx"},{"address":"/sensors/3/state/buttonevent","operator":"eq","value":"34"}],"actions":[{"address":"/groups/3/action","method":"PUT","body":{"on":false,"transitiontime":30}},{"address":"/lights/17/state","method":"PUT","body":{"on":false}}]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
-curl -s -H "Accept: application/json" -X POST --data '{"name":"TapKeuken.2","conditions":[{"address":"/sensors/3/state/lastupdated","operator":"dx"},{"address":"/sensors/3/state/buttonevent","operator":"eq","value":"16"}],"actions":[{"address":"/groups/3/action","method":"PUT","body":{"scene":"EVf24QboVUqvcbW"}},{"address":"/lights/17/state","method":"PUT","body":{"on":true}}]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
-curl -s -H "Accept: application/json" -X POST --data '{"name":"TapKeuken.3","conditions":[{"address":"/sensors/3/state/lastupdated","operator":"dx"},{"address":"/sensors/3/state/buttonevent","operator":"eq","value":"17"}],"actions":[{"address":"/groups/3/action","method":"PUT","body":{"scene":"EVf24QboVUqvcbW"}},{"address":"/lights/17/state","method":"PUT","body":{"on":false}}]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
-curl -s -H "Accept: application/json" -X POST --data '{"name":"TapKeuken.4","conditions":[{"address":"/sensors/3/state/lastupdated","operator":"dx"},{"address":"/sensors/3/state/buttonevent","operator":"eq","value":"18"}],"actions":[{"address":"/groups/3/action","method":"PUT","body":{"scene":"Ya1-SihTfsUFXeH"}},{"address":"/lights/17/state","method":"PUT","body":{"on":false}}]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
+curl -s -H "Accept: application/json" -X POST --data '{\
+"name":"TapKeuken.1",\
+"conditions":[\
+{"address":"/sensors/3/state/lastupdated","operator":"dx"},\
+{"address":"/sensors/3/state/buttonevent","operator":"eq","value":"34"}\
+],\
+"actions":[\
+{"address":"/groups/3/action","method":"PUT","body":{"on":false,"transitiontime":30}},\
+{"address":"/lights/17/state","method":"PUT","body":{"on":false}}\
+]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
+
+curl -s -H "Accept: application/json" -X POST --data '{\
+"name":"TapKeuken.2",\
+"conditions":[\
+{"address":"/sensors/3/state/lastupdated","operator":"dx"},\
+{"address":"/sensors/3/state/buttonevent","operator":"eq","value":"16"}\
+],\
+"actions":[\
+{"address":"/groups/3/action","method":"PUT","body":{"scene":"EVf24QboVUqvcbW"}},\
+{"address":"/lights/17/state","method":"PUT","body":{"on":true}}\
+]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
+
+curl -s -H "Accept: application/json" -X POST --data '{\
+"name":"TapKeuken.3",\
+"conditions":[\
+{"address":"/sensors/3/state/lastupdated","operator":"dx"},\
+{"address":"/sensors/3/state/buttonevent","operator":"eq","value":"17"}\
+],\
+"actions":[\
+{"address":"/groups/3/action","method":"PUT","body":{"scene":"EVf24QboVUqvcbW"}},\
+{"address":"/lights/17/state","method":"PUT","body":{"on":false}}\
+]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
+
+curl -s -H "Accept: application/json" -X POST --data '{\
+"name":"TapKeuken.4",\
+"conditions":[\
+{"address":"/sensors/3/state/lastupdated","operator":"dx"},\
+{"address":"/sensors/3/state/buttonevent","operator":"eq","value":"18"}\
+],\
+"actions":[\
+{"address":"/groups/3/action","method":"PUT","body":{"scene":"Ya1-SihTfsUFXeH"}},\
+{"address":"/lights/17/state","method":"PUT","body":{"on":false}}\
+]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
+
 
 #Hallway lights based on Front Door TAP
 curl -s -H "Accept: application/json" -X POST --data '{"name":"TapVoordeur.1","conditions":[{"address":"/sensors/4/state/lastupdated","operator":"dx"},{"address":"/sensors/4/state/buttonevent","operator":"eq","value":"34"}],"actions":[{"address":"/groups/0/action","method":"PUT","body":{"on":false}},{"address":"/sensors/43/state","method":"PUT","body":{"presence":false}}]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
