@@ -1,5 +1,5 @@
 #!/bin/bash
-VERSION="1716.1"
+VERSION="1717.7"
 
 HUE_IP=$(curl https://www.meethue.com/api/nupnp 2> /dev/null | jq -r ".[0].internalipaddress")
 HUE_USER=vSuYBJAton1scEhPyDf4ep85GgmRyFvjJfBjYHIC
@@ -11,10 +11,10 @@ sleep 3
 
 curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 17500}}' http://${HUE_IP}/api/${HUE_USER}/sensors/13; echo
 curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 17500}}' http://${HUE_IP}/api/${HUE_USER}/sensors/17; echo
-curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 25000}}' http://${HUE_IP}/api/${HUE_USER}/sensors/21; echo
+curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 35000}}' http://${HUE_IP}/api/${HUE_USER}/sensors/21; echo
 curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 60000}}' http://${HUE_IP}/api/${HUE_USER}/sensors/25; echo
 curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 17500}}' http://${HUE_IP}/api/${HUE_USER}/sensors/29; echo
-curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 25000}}' http://${HUE_IP}/api/${HUE_USER}/sensors/33; echo
+curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 30000}}' http://${HUE_IP}/api/${HUE_USER}/sensors/33; echo
 curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 60000}}' http://${HUE_IP}/api/${HUE_USER}/sensors/37; echo
 curl -s -H "Accept: application/json" -X PUT --data '{"config":{"tholddark": 60000}}' http://${HUE_IP}/api/${HUE_USER}/sensors/41; echo
 
