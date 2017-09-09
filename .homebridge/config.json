@@ -15,5 +15,19 @@
         "clientId": "43cb61bb-9132-4f0b-a64d-fad0493235a2",
         "clientSecret": "wrz2iwzm4QjYjyiTnTnPAVMkG",
         "code": "QY43WJ3A"
+    },
+    {
+        "platform": "netatmo",
+        "name": "netatmo platform",
+        "ttl": 5,
+        "auth": {
+                "client_id": "59b3f42d2a4b1bd4378b70b7",
+                "client_secret": "2VfAMvZLwrzr9p8unPwYdqbQGNQ0qqHE",
+                "username": "erikvennink@gmail.com",
+                "password": "Ev!3745@"
+            },
+        "deviceTypes": [
+              "weatherstation"
+            ]
     }
 ]}
