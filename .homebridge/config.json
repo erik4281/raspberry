@@ -27,9 +27,7 @@
                 "password": "Ev!3745@"
             },
         "deviceTypes": [
-              "weatherstation",
-              "thermostat",
-              "camera"
+              "weatherstation"
             ]
     }
 ]}
