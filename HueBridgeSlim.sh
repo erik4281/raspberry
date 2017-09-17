@@ -1,5 +1,5 @@
 #!/bin/bash
-VERSION="1737.6"
+VERSION="1737.7"
 
 HUE_IP=$(curl https://www.meethue.com/api/nupnp 2> /dev/null | jq -r ".[0].internalipaddress")
 HUE_USER=vSuYBJAton1scEhPyDf4ep85GgmRyFvjJfBjYHIC
