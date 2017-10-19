@@ -1,5 +1,5 @@
 #!/bin/bash
-VERSION="1738.1"
+VERSION="1742.4"
 
 HUE_IP=$(curl https://www.meethue.com/api/nupnp 2> /dev/null | jq -r ".[0].internalipaddress")
 HUE_USER=vSuYBJAton1scEhPyDf4ep85GgmRyFvjJfBjYHIC
@@ -200,7 +200,7 @@ curl -s -H "Accept: application/json" -X POST --data '{"name":"SensorBadkamer.on
 curl -s -H "Accept: application/json" -X POST --data '{"name":"SensorBadkamer.off","conditions":[{"address":"/sensors/40/config/on","operator":"dx"},{"address":"/sensors/40/config/on","operator":"eq","value":"false"}],"actions":[{"address":"/sensors/39/config","method":"PUT","body":{"on":false}},{"address":"/sensors/41/config","method":"PUT","body":{"on":false}}]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
 
 #Rules for Automated Fan during night
-curl -s -H "Accept: application/json" -X POST --data '{"name":"MotionFan.on","conditions":[{"address":"/config/localtime","operator":"in","value":"T22:00:00/T04:00:00"},{"address":"/sensors/44/state/presence","operator":"eq","value":"false"},{"address":"/sensors/44/state/presence","operator":"ddx","value":"PT00:30:00"},{"address":"/sensors/61/state/presence","operator":"eq","value":"false"}],"actions":[{"address":"/lights/17/state","method":"PUT","body":{"on":true}},{"address":"/sensors/61/state","method":"PUT","body":{"presence":true}}]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
+curl -s -H "Accept: application/json" -X POST --data '{"name":"MotionFan.on","conditions":[{"address":"/config/localtime","operator":"in","value":"T22:00:00/T04:00:00"},{"address":"/sensors/43/state/presence","operator":"eq","value":"true"},{"address":"/sensors/44/state/presence","operator":"eq","value":"false"},{"address":"/sensors/44/state/presence","operator":"ddx","value":"PT00:30:00"},{"address":"/sensors/61/state/presence","operator":"eq","value":"false"}],"actions":[{"address":"/lights/17/state","method":"PUT","body":{"on":true}},{"address":"/sensors/61/state","method":"PUT","body":{"presence":true}}]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
 curl -s -H "Accept: application/json" -X POST --data '{"name":"MotionFan.off","conditions":[{"address":"/config/localtime","operator":"in","value":"T06:00:00/T12:00:00"},{"address":"/sensors/44/state/presence","operator":"eq","value":"true"},{"address":"/sensors/44/state/presence","operator":"dx"},{"address":"/sensors/61/state/presence","operator":"eq","value":"true"}],"actions":[{"address":"/lights/17/state","method":"PUT","body":{"on":false}},{"address":"/sensors/61/state","method":"PUT","body":{"presence":false}}]}' http://${HUE_IP}/api/${HUE_USER}/rules/; echo
 
 #Presence triggers
