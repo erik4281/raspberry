@@ -25,7 +25,7 @@ while true; do
 
 HOME_OLD=${HOME_STATE}
 
-CHECK_LIGHTS=$(curl -s -silent -H "Accept: application/json" -X GET http://${HUE_IP}/api/${HUE_USER}/sensors/43/ | grep '{"state":{"presence":true')
+CHECK_LIGHTS=$(curl -s -silent -H "Accept: application/json" -X GET http://${HUE_IP}/api/${HUE_USER}/sensors/18/ | grep '{"state":{"on":true')
 
 if [ "${CHECK_LIGHTS}" ]; then
   HOME_STATE=1
