@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION="1701.4"
+VERSION="1742.4"
 
 DELAY_BETWEEN_CHECKS=15
 
